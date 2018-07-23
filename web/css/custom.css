@@ -1,0 +1,249 @@
+.animated.middle-time {
+    -webkit-animation-duration: 4s;
+    animation-duration: 4s;
+}
+
+.middle-box h1 {
+    font-size: 100px;
+}
+
+body.gray-bg .form-group .error {
+    display: block;
+    text-align: left;
+    margin-left: 1em;
+    font-size: 0.9em;
+    color: #cc0000;
+}
+
+.nav > li > a i {
+    margin-right: 6px;
+    min-width: 15px;
+}
+
+.profile-image-holder {
+    text-align: center;
+}
+
+.profile-data-holder {
+    margin-top: 2em;
+}
+
+.profile-view-data-holder {
+    margin-top: 2em;
+    text-align: center;
+}
+
+.wrapper {
+    margin-bottom: 2em;
+}
+
+.profile-finance-ballance-info-palce {
+    font-size: 6em;
+    text-align: center;
+}
+
+.money-sum.negative
+{
+    color: #cc0000;
+}
+
+.money-sum.positive
+{
+    color: #00cc00;
+}
+
+.money-sum .currency
+{
+    font-size: 0.9em;
+}
+
+.btn i.with-text
+{
+    margin-right: 0.5em;
+}
+
+.nav-header .logo-element
+{
+    font-weight: 100;
+    font-size: 3em;
+}
+
+.toggle-controller
+{
+    border-bottom: 1px dashed;
+    border-color: #23527c;
+    color: #23527c;
+    font-weight: 100;
+    cursor: pointer;
+}
+
+.chat-discussion .chat-message.new .message
+{
+    -webkit-box-shadow: 0px 0px 4px 0px rgba(255, 255, 50, 1);
+    -moz-box-shadow:    0px 0px 4px 0px rgba(255, 255, 50, 1);
+    box-shadow:         0px 0px 4px 0px rgba(255, 255, 50, 1);
+}
+
+.chat-discussion .LoadMorePlace
+{
+    text-align: center;
+}
+
+
+.chat-discussion .chat-message .message .files
+{
+    border-top: 1px dashed #0a6aa1;
+    margin-top: 0.5em;
+    padding: 0.1em;
+}
+
+.chat-discussion .chat-message .files .chat-message-files
+{
+    display: block;
+}
+
+.chat-discussion .chat-message .message .files li
+{
+    display: inline-block;
+    padding: 0.1em 0.3em;
+}
+
+.indicated-palce > .sk-spinner {
+    display: none;
+}
+.indicated-palce.loading-process {
+    position: relative;
+}
+.indicated-palce.loading-process:after {
+    content: '';
+    background-color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.indicated-palce.loading-process > .sk-spinner {
+    display: block;
+    position: absolute;
+    top: 40%;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+}
+
+
+
+/*************/
+
+.activeLabelList
+{
+    padding: 0.3em;
+    min-height: 2em;
+}
+
+.activeLabelList .item
+{
+    background-color: #1ab394;
+    color: #FFFFFF;
+    padding: 0.3em;
+    border-radius: 2px;
+    margin: 0.2em;
+}
+
+.activeLabelList .item a
+{
+    color: #FFFFFF;
+}
+
+.activeLabelList .item .text
+{
+    margin-left: 0.5em;
+}
+
+.activeLabelList .item .form
+{
+    display: none;
+}
+
+.activeLabelList .item .remove
+{
+    cursor: pointer;
+    margin-left: 0.5em;
+}
+
+.activeLabelList .item .remove:hover
+{
+    background-color: #20b3b2;
+}
+
+.activeLabelList .item .remove:after
+{
+    display: inline-block;
+    content: "X";
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    cursor: pointer;
+}
+
+.contact-box.center-version > a
+{
+    padding-bottom: 0;
+}
+
+.contact-box.center-version .close-link
+{
+    padding:2px;
+    display: inline-block;
+    float: right;
+    margin-right: 3px;
+}
+
+.contact-box.center-version > div
+{
+    padding-bottom: 20px;
+}
+
+.contact-box.center-version .post-change
+{
+    display: none;
+    height: 1.4em;
+}
+
+.contact-box.center-version .post-change input[type=text]
+{
+    border: none;
+    text-align: center;
+}
+
+/**********/
+
+.MyTaskList
+{
+
+}
+
+.MyTaskList .item
+{
+    padding: 0.5em;
+    border-bottom: 1px solid #cccccc;
+}
+
+.MyTaskList .item .caption
+{
+    font-size: 1.3em;
+}
+
+.MyTaskList .item .text
+{
+    border: 1px solid #e7eaec;
+    box-shadow: none;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    font-size: 11px;
+    line-height: 16px;
+    min-height: 20px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}

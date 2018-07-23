@@ -1,0 +1,45 @@
+{% import "shared_macro.html.twig" as shared %}
+{% set user = projetUser.user %}
+<div class="col-lg-3 item-contaner">
+    <div data-project="{{ projetUser.project.id }}" data-project_user="{{ projetUser.id }}" class="indicated-palce contact-box center-version">
+        <div class="sk-spinner sk-spinner-double-bounce">
+            <div class="sk-double-bounce1"></div>
+            <div class="sk-double-bounce2"></div>
+        </div>
+        <a class="close-link" target="#" onclick="return false;">
+            <i class="fa fa-times"></i>
+        </a>
+        <a href="{{ path('astra_profile_view',{'userName':user.userName}) }}">
+            <img alt="image" class="img-circle" src="{{ UserPhoto(user,'avatar_middle') }}">
+            <h3 class="m-b-xs"><strong>{{ shared.UserName(user) | trim }}</strong></h3>
+        </a>
+        <div class="text-center">
+            <div class="font-bold">
+                <div class="post-name" style="">
+                    {% if projetUser.post | length > 0 %}
+                        {{ projetUser.post }}
+                    {% else %}
+                        {{ projetUser.getPostFormatted | trans }}
+                    {% endif %}
+                </div>
+                <div class="post-change">
+                    <input type="text" name="post" data-value="{{ projetUser.post }}" placeholder="{{ 'projects.post' | trans }}">
+                </div>
+            </div>
+            <address class="m-t-md">
+                <strong>Twitter, Inc.</strong><br>
+                795 Folsom Ave, Suite 600<br>
+                San Francisco, CA 94107<br>
+                <abbr title="Phone">P:</abbr> (123) 456-7890
+            </address>
+        </div>
+
+        <div class="contact-box-footer">
+            <div class="m-t-xs btn-group">
+                <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
+                <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
+                <a class="btn btn-xs btn-white"><i class="fa fa-user-plus"></i> Follow</a>
+            </div>
+        </div>
+    </div>
+</div>

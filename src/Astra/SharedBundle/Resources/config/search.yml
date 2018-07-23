@@ -1,0 +1,3 @@
+astra_shared_search_all:
+    path:     /all
+    defaults: { _controller: AstraSharedBundle:Search:Search}

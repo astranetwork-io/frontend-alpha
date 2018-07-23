@@ -1,0 +1,44 @@
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        avatar_small:
+            quality: 100
+            filters:
+                thumbnail: { size: [48, 48], mode: outbound }
+        avatar_middle:
+            quality: 100
+            filters:
+                thumbnail: { size: [128, 128], mode: outbound }
+        avatar_big:
+            quality: 100
+            filters:
+                thumbnail: { size: [256, 256], mode: outbound }
+        image_preview_big:
+            quality: 100
+            filters:
+                thumbnail: { size: [1024, 1024], mode: inset }
+        image_preview_file_manager:
+            quality: 100
+            filters:
+                thumbnail: { size: [400, 268], mode: inset }
+        image_preview_middle:
+            quality: 100
+            filters:
+                thumbnail: { size: [512, 512], mode: inset }
+        image_preview_small:
+            quality: 100
+            filters:
+                thumbnail: { size: [256, 256], mode: inset }
+        image_preview_smallest:
+            quality: 100
+            filters:
+                thumbnail: { size: [128, 128], mode: inset }
+        image_preview_micro:
+            quality: 100
+            filters:
+                thumbnail: { size: [64, 64], mode: inset }
+

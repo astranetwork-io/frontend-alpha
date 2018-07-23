@@ -1,0 +1,55 @@
+{% extends "::body_main.html.twig" %}
+
+{% block title %}{{ 'search.result' | trans }}{% endblock %}
+{% block caption %}{{ 'search.name' | trans }}{% endblock %}
+
+{% block body %}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <h2>
+                            {{ totalResult }} {{ 'search.resultBy' | trans }}:
+                            <span class="text-navy">“{{ searchRequest }}”</span>
+                        </h2>
+                        <div class="search-form">
+
+                            <form action="{{ path('astra_shared_search_all') }}" method="get">
+                                <div class="input-group">
+                                    <input placeholder="{{ searchRequest }}" value="{{ searchRequest }}" name="search" class="form-control input-lg" type="text">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-lg btn-primary" type="submit">
+                                            {{ 'search.buttonName' | trans }}
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        {% if users | length > 0 %}
+                            <div class="hr-line-dashed"></div>
+                            <div class="row">
+                                {% for user in users %}
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="contact-box">
+                                            <a href="{{ path('astra_profile_view',{'userName':user.userName}) }}">
+                                                <div class="col-sm-12">
+                                                    <div class="text-center">
+                                                        <img alt="image" class="img-circle m-t-xs " src="{{ UserPhoto(user,'avatar_middle') }}">
+                                                        <div class="m-t-xs font-bold">Graphics designer</div>
+                                                        <h3><strong>{{ shared.UserName(user) | trim }}</strong></h3>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <div class="hr-line-dashed"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,3 @@
+astra_shared_tag_ajax_load_by_name:
+    path:     /AjaxLoadByName
+    defaults: { _controller: AstraSharedBundle:Tag:AjaxLoadByName }

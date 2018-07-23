@@ -1,0 +1,24 @@
+{% import "shared_macro.html.twig" as shared %}
+{% for message in messages %}
+    {% set user = message.user %}
+    <div data-itemid="{{ message.id }}" class="chat-message {%  if user == currentUser %}right{% else %}left{% endif %} animated fadeInDownBig {% if message.isRead == false %}new{% endif %}">
+        <img class="message-avatar" src="{{ UserPhoto(user,'avatar_small') }}" alt="">
+        <div class="message">
+            <a class="message-author" href="{{ path('astra_profile_view',{'userName':user}) }}">{{ shared.UserName(user) | trim }}</a>
+            <span class="message-date">{{ message.created | date_time_format }}</span>
+            <span class="message-content">{{ message.text | nl2br }}</span>
+            {% if message.getFiles | length > 0 %}
+            <div class="files">
+                <ul class="list-unstyled chat-message-files">
+                    {% for file in message.getFiles %}
+                        <li><a href="{{ publicFile(file.asset) }}" target="_blank">
+                                <i class="fa fa-file{% if file.type == 'image' %}-picture-o{% endif %}"></i>
+                                {{ file.name }}
+                            </a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}

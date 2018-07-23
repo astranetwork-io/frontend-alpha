@@ -1,0 +1,17 @@
+{% import _self as shared %}
+{%- macro UserName(user) -%}
+    {% if user %}
+        {% set partName = [] %}
+        {% if user.name | length > 0 %}{% set partName = partName|merge([user.name]) %}{% endif %}
+        {% if user.surname | length > 0 %}{% set partName = partName|merge([user.surname]) %}{% endif %}
+        {% if partName | length < 1 %}{% set partName = partName|merge([user.username]) %}{% endif %}
+        {{ partName|join(' ') }}
+    {% endif %}
+{%- endmacro UserName -%}
+
+{%- macro MoneySumm(sum) -%}
+    <span class="money-sum {% if sum > 0%}positive{% elseif sum < 0 %}negative{% endif %}">
+        <span class="value">{{ sum }}</span>
+        <span class="currency">{{ 'textLogo' | trans }}</span>
+    </span>
+{%- endmacro MoneySumm -%}

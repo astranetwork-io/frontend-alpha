@@ -1,0 +1,68 @@
+{% extends "::body_main.html.twig" %}
+
+{% block title %}{{ 'projects.projectList' | trans }}{% endblock %}
+{% block caption %}{{ 'projects.projectList' | trans }}{% endblock %}
+
+
+{% import _self as tf %}
+{%- macro ProjectOut(project) -%}
+    {% import "shared_macro.html.twig" as shared %}
+<div class="ibox">
+    <div class="ibox-title">
+        <h5><a href="{{ path('astra_shared_project_view', {'id':project.id}) }}">{{ project.name }}</a></h5>
+    </div>
+    <div class="ibox-content">
+        <div class="team-members">
+            {% for projectUser in project.users %}
+                <a href="{{ path('astra_profile_view',{'userName':projectUser.user.userName}) }}" title="{{ shared.UserName(projectUser.user) | trim }}"><img alt="image" class="img-circle" src="{{ UserPhoto(projectUser.user,'avatar_small') }}"></a>
+            {% endfor %}
+        </div>
+        {{ project.description | raw }}
+        <div>
+            <span>{{ 'projects.completed' | trans }}:</span>
+            <div class="stat-percent">48%</div>
+            <div class="progress progress-mini">
+                <div style="width: 48%;" class="progress-bar"></div>
+            </div>
+        </div>
+        <div class="row  m-t-sm">
+            <div class="col-sm-4">
+                <div class="font-bold">PROJECTS</div>
+                12
+            </div>
+            <div class="col-sm-4">
+                <div class="font-bold">RANKING</div>
+                4th
+            </div>
+            <div class="col-sm-4 text-right">
+                <div class="font-bold">BUDGET</div>
+                $200,913 <i class="fa fa-level-up text-navy"></i>
+            </div>
+        </div>
+
+    </div>
+</div>
+{%- endmacro ProjectOut -%}
+
+{% set columnId = 0 %}
+{% set column_0 = '' %}
+{% set column_1 = '' %}
+{% set column_2 = '' %}
+{% for project in projects %}
+    {% if columnId == 0 %}{% set column_0 = column_0~tf.ProjectOut(project) %}{% endif %}
+    {% if columnId == 1 %}{% set column_1 = column_1~tf.ProjectOut(project) %}{% endif %}
+    {% if columnId == 2 %}{% set column_2 = column_2~tf.ProjectOut(project) %}{% endif %}
+    {% set columnId = columnId+1 %}
+    {% if columnId > 2 %}{% set columnId = 0 %}{% endif %}
+{% endfor %}
+
+
+{% block body %}
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-4">{{ column_0 | raw }}</div>
+            <div class="col-lg-4">{{ column_1 | raw }}</div>
+            <div class="col-lg-4">{{ column_2 | raw }}</div>
+        </div>
+    </div>
+{% endblock %}

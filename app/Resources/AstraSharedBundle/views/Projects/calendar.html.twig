@@ -1,0 +1,154 @@
+{% extends "::body_main.html.twig" %}
+{% block title %}{{ 'projects.agile.name' | trans }} "{{ project.name }}"{% endblock %}
+{% block caption %}{{ 'projects.agile.name' | trans }} "<a href="{{ path('astra_shared_project_view',{'id':project.id}) }}">{{ project.name }}</a>"{% endblock %}
+
+{% block body %}
+    <div class="wrapper wrapper-content">
+        <div class="row animated fadeInDown">
+            <div class="col-lg-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <a href="{{ path('astra_shared_project_task_add',{'id':project.id,'calendar':1}) }}" type="button" class="btn btn-outline btn-block btn-primary">{{ 'task.addNewTask' | trans }}</a>
+                    </div>
+                    <div class="ibox-content">
+                        <div id='external-events'>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+
+    <!-- Full Calendar -->
+    <script src="{{ asset('js/plugins/fullcalendar/fullcalendar.min.js') }}"></script>
+
+    <script>
+
+        $(document).ready(function() {
+
+            /* initialize the external events
+             -----------------------------------------------------------------*/
+
+
+            $('#external-events div.external-event').each(function() {
+
+                // store data so the calendar knows to render an event upon drop
+                $(this).data('event', {
+                    title: $.trim($(this).text()), // use the element's text as the event title
+                    stick: true // maintain when user navigates (see docs on the renderEvent method)
+                });
+
+                // make the event draggable using jQuery UI
+                $(this).draggable({
+                    zIndex: 1111999,
+                    revert: true,      // will cause the event to go back to its
+                    revertDuration: 0  //  original position after the drag
+                });
+
+            });
+
+
+            /* initialize the calendar
+             -----------------------------------------------------------------*/
+
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                height: "auto",
+                editable: true,
+                droppable: true, // this allows things to be dropped onto the calendar
+                drop: function() {
+                    // is the "remove after drop" checkbox checked?
+                    if ($('#drop-remove').is(':checked')) {
+                        // if so, remove the element from the "Draggable Events" list
+                        $(this).remove();
+                    }
+                },
+                eventSources: [
+                    {
+                        url: '{{ path('astra_shared_task_calendar_project_loader') }}',
+                        type: 'POST',
+                        data: {
+                            projectId: '{{ project.id }}'
+                        },
+                        error: function() {
+                            alert('there was an error while fetching events!');
+                        }
+                    }
+                ],
+
+                eventDrop: function(event, jsEvent, ui, view) {
+                    sendEvent(event);
+                },
+
+                eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
+                    sendEvent(event);
+                }
+            });
+
+
+        });
+
+        function sendEvent(event) {
+
+            if ((event.id === undefined) || (event.start === undefined) || (event.end === undefined))
+            {
+                alert('{{ 'task.calendar.formatError'|trans }}');
+                return;
+            }
+
+            var date_start =  event.start._d.toJSON();
+            var date_end =  '';
+            if(event.end)
+            {
+                date_end =  event.end._d.toJSON();
+            }
+
+            var data =
+                {
+                    'id':event.id,
+                    'start':date_start,
+                    'end':date_end
+                };
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ path('astra_shared_task_calendar_update') }}",
+                data: data,
+                dataType:'json',
+                success: function(responce) {
+                    if
+                    (
+                        (responce.success == undefined)
+                        || (responce.message == undefined)
+                    ) {
+                        alert('Wrong server ansver');
+                        return;
+                    }
+
+                    if(!responce.success)
+                    {
+                        alert(responce.message);
+                    }
+                },
+                error:  function(){
+                    alert('Возникла ошибка: ');
+                }
+            });
+        }
+
+    </script>
+{% endblock %}

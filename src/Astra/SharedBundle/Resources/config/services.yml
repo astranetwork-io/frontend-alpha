@@ -1,0 +1,106 @@
+services:
+#    astra_shared.example:
+#        class: Astra\SharedBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    twig.extension.site:
+        class: Astra\SharedBundle\Twig\Extension
+        arguments: ["@liip_imagine.twig.extension","@twig.extension.assets",'%public_files_directory%','%private_files_directory%',"@security.token_storage"]
+        tags:
+            - { name: twig.extension }
+
+    astra.search.service:
+        class: Astra\SharedBundle\Services\SearchService
+        arguments: ["@doctrine.orm.entity_manager","@security.token_storage"]
+        public: true
+
+    astra.project_user.service:
+        class: Astra\SharedBundle\Services\ProjectUserService
+        arguments: ["@doctrine.orm.entity_manager"]
+        public: true
+
+    astra.file.service:
+        class: Astra\SharedBundle\Services\FileService
+        arguments: ["@doctrine.orm.entity_manager",'%kernel.root_dir%','%public_files_directory%','%private_files_directory%']
+        public: true
+
+    astra.project_file.service:
+        class: Astra\SharedBundle\Services\ProjectFileService
+        arguments: ["@doctrine.orm.entity_manager","@astra.file.service"]
+        public: true
+
+    astra.user_file.service:
+        class: Astra\SharedBundle\Services\UserFileService
+        arguments: ["@doctrine.orm.entity_manager","@astra.file.service"]
+        public: true
+
+    astra.task_file.service:
+        class: Astra\SharedBundle\Services\TaskFileService
+        arguments: ["@doctrine.orm.entity_manager","@astra.file.service"]
+        public: true
+
+    astra.chat.service:
+        class: Astra\SharedBundle\Services\ChatService
+        arguments: ["@doctrine.orm.entity_manager"]
+        public: true
+
+
+    astra.finance.service:
+        class: Astra\SharedBundle\Services\FinanceService
+        arguments: ["@doctrine.orm.entity_manager","@security.token_storage"]
+        public: true
+
+    astra.project.service:
+        class: Astra\SharedBundle\Services\ProjectService
+        arguments: ["@doctrine.orm.entity_manager", "@security.token_storage", "@astra.project_file.service", "@astra.project_user.service"]
+        public: true
+
+
+    astra.tag.service:
+        class: Astra\SharedBundle\Services\TagService
+        arguments: ["@doctrine.orm.entity_manager"]
+        public: true
+
+    astra.task.service:
+            class: Astra\SharedBundle\Services\TaskService
+            arguments: ["@doctrine.orm.entity_manager", "@astra.task.service.project", "@astra.task.service.user","@router"]
+            public: true
+
+    astra.task.service.user:
+            class: Astra\SharedBundle\Services\TaskServiceUser
+            arguments: ["@doctrine.orm.entity_manager"]
+            public: true
+
+    astra.task.service.project:
+            class: Astra\SharedBundle\Services\TaskServiceProject
+            arguments: ["@doctrine.orm.entity_manager"]
+            public: true
+
+    astra.project_tag.service:
+            class: Astra\SharedBundle\Services\ProjectTagService
+            arguments: ["@doctrine.orm.entity_manager","@astra.tag.service"]
+            public: true
+
+    app.menu_builder:
+        class: Astra\SharedBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory","@astra.shared_variable.service"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
+            - { name: knp_menu.menu_builder, method: createUserMenu, alias: user }
+            - { name: knp_menu.menu_builder, method: createMyProfileMenu, alias: myprofile }
+            - { name: knp_menu.menu_builder, method: createProjectMenu, alias: project }
+
+    astra.type.tag_selector_type:
+        class: Astra\SharedBundle\Form\Type\TagSelectorType
+        arguments: ["@astra.tag.service","@form.choice_list_factory"]
+        tags:
+            - { name: form.type, alias: issue_selector }
+
+    astra.shared_variable.service:
+        class: Astra\SharedBundle\Services\SharedVariableService
+
+    astra.contact.service:
+        class: Astra\SharedBundle\Services\ContactsService
+        arguments: ["@doctrine.orm.entity_manager","@astra.chat.service"]
+        public: true
+

@@ -1,0 +1,5 @@
+{% extends 'body_clean_form.html.twig' %}
+{% block body %}
+    <p>{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}</p>
+    <a class="btn btn-sm btn-white btn-block" href="{{ url('fos_user_security_login') }}">{{ 'register.toLogin' | trans }}</a>
+{% endblock body %}

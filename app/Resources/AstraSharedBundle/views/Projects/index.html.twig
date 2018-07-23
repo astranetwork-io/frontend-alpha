@@ -1,0 +1,67 @@
+{% extends "::body_main.html.twig" %}
+
+{% block title %}{{ 'projects.projectList' | trans }}{% endblock %}
+{% block caption %}{{ 'projects.projectList' | trans }}{% endblock %}
+
+{% block body %}
+    <div class="wrapper wrapper-content animated fadeInUp">
+
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>{{ 'projects.AllUserAssignedProject' | trans }}</h5>
+                <div class="ibox-tools">
+                    <a href="{{ path('astra_shared_project_add') }}" class="btn btn-primary btn-xs">{{ 'projects.addProject' | trans }}</a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row m-b-sm m-t-sm">
+                    <div class="col-md-1">
+                        <a type="button" href="{{ path('astra_shared_project_list') }}" class="btn btn-white btn-sm"><i class="fa fa-refresh"></i> {{ 'projects.refresh' | trans }}</a>
+                    </div>
+                    <div class="col-md-11">
+                        <form class="form-horizontal" method="get" action="{{ path('astra_shared_project_list') }}">
+                        <div class="input-group">
+                            <input name="search" placeholder="Search" class="input-sm form-control" type="text"> <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-sm btn-primary"> Go!</button> </span></div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="project-list">
+
+                    <table class="table table-hover">
+                        <tbody>
+                        {% for project in projects %}
+                        <tr>
+                            <td class="project-status">
+                                <span class="label label-primary">Active</span>
+                            </td>
+                            <td class="project-title">
+                                <a href="{{ path('astra_shared_project_view', {'id':project.id}) }}">{{ project.name }}</a>
+                                <br>
+                                <small>{{ 'projects.created' | trans }} {{ project.created | date_time_format }}</small>
+                            </td>
+                            <td class="project-completion">
+                                <small>{{ 'projects.completed' | trans }}: 48%</small>
+                                <div class="progress progress-mini">
+                                    <div style="width: 48%;" class="progress-bar"></div>
+                                </div>
+                            </td>
+                            <td class="project-people">
+                                {% for projectUser in project.users %}
+                                    <a href="{{ path('astra_profile_view',{'userName':projectUser.user.userName}) }}" title="{{ shared.UserName(projectUser.user) | trim }}"><img alt="image" class="img-circle" src="{{ UserPhoto(projectUser.user,'avatar_small') }}"></a>
+                                {% endfor %}
+                            </td>
+                            <td class="project-actions">
+                                <a href="{{ path('astra_shared_project_view', {'id':project.id}) }}" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
+                                <a href="{{ path('astra_shared_project_edit', {'id':project.id}) }}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

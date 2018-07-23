@@ -1,0 +1,89 @@
+{% extends "::body_main.html.twig" %}
+{% block title %}{{ 'myProfile.agile.name' | trans }}{% endblock %}
+{% block caption %}{{ 'myProfile.agile.name' | trans }}{% endblock %}
+
+{% block body %}
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="row">
+            {% for statusName, order in statusList %}
+                <div class="col-lg-4">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <h3>{{ ('task.statusNames.'~statusName) | trans }}</h3>
+                            <p class="small"><i class="fa fa-hand-o-up"></i> {{ 'task.dragToList' | trans }}</p>
+
+                            {% if loop.first %}
+                                <form method="get" action="{{ path('astra_myprofile_task_add') }}">
+                                <div class="input-group">
+                                    <input name="new_name" placeholder="{{ 'task.addNewTask' | trans }}" class="input input-sm form-control" type="text">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-sm btn-white"> <i class="fa fa-plus"></i> {{ 'task.addTask' | trans }}</button>
+                                </span>
+                                </div>
+                                </form>
+                            {% endif %}
+                            <ul class="sortable-list connectList agile-list ui-sortable" id="{{ statusName }}">
+                                {% for itemList in agileList[statusName] | default([]) %}
+                                    <li class="warning-element" id="{{ itemList.id }}">
+                                        <a href="{{ path('astra_myprofile_task_edit',{'task':itemList.task.id}) }}">{{ itemList.task.caption }}</a>
+                                        <div class="agile-detail">
+                                            <a href="#" class="pull-right btn btn-xs btn-white">Tag</a>
+                                            <i class="fa fa-clock-o"></i> {{ itemList.task.endWork | date_time_format }}
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {% set statusIds = [] %}
+    {% for statusName, order in statusList %}
+        {% set statusIds = statusIds|merge(['#'~statusName]) %}
+    {% endfor %}
+    <script>
+        $(document).ready(function () {
+            $("{{ statusIds | join(', ') }}").sortable({
+                connectWith: ".connectList",
+                update: function (event, ui)
+                {
+                    var data = {};
+                    {% for statusName, order in statusList %}
+                        data["{{ statusName }}"] = $("{{ '#'~statusName }}").sortable("toArray");
+                    {% endfor %}
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ path('astra_shared_agile_reorder') }}",
+                        data: {'taskList':{{ taskList.id}}, 'data':data},
+                        dataType:'json',
+                        success: function(responce) {
+                            if
+                            (
+                                (responce.success == undefined)
+                                || (responce.message == undefined)
+                            ) {
+                                alert('Wrong server ansver');
+                                return;
+                            }
+
+                            if(!responce.success)
+                            {
+                                alert(responce.message);
+                                return;
+                            }
+                        },
+                        error:  function(xhr, str){
+                            alert('Возникла ошибка: ' + xhr.responseCode);
+                        }
+                    });
+                }
+            }).disableSelection();
+
+        });
+    </script>
+{% endblock %}

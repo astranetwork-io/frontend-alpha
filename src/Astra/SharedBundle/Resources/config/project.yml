@@ -1,0 +1,122 @@
+astra_shared_project_index:
+    path:     /
+    defaults: { _controller: AstraSharedBundle:Projects:Index }
+
+astra_shared_project_list:
+    path:     /list
+    defaults: { _controller: AstraSharedBundle:Projects:Index }
+
+astra_shared_project_mosaic:
+    path:     /list-mosaic
+    defaults: { _controller: AstraSharedBundle:Projects:Index, template: 'mosaic'}
+
+astra_shared_project_add:
+    path:     /add
+    defaults: { _controller: AstraSharedBundle:Projects:Edit, id: 0 }
+
+astra_shared_project_edit:
+    path:     /edit/{id}
+    defaults: { _controller: AstraSharedBundle:Projects:Edit }
+    requirements:
+      id:  \d+
+
+astra_shared_project_view:
+    path:     /view/{id}
+    defaults: { _controller: AstraSharedBundle:Projects:View }
+    requirements:
+      id:  \d+
+
+astra_shared_project_view_messages:
+    path:     /view/{id}/messages
+    defaults: { _controller: AstraSharedBundle:Projects:View }
+    requirements:
+      id:  \d+
+
+astra_shared_project_view_tasks:
+    path:     /view/{id}/tasks
+    defaults: { _controller: AstraSharedBundle:Projects:View }
+    requirements:
+      id:  \d+
+
+astra_shared_project_view_users:
+    path:     /view/{id}/users
+    defaults: { _controller: AstraSharedBundle:Projects:Users }
+    requirements:
+      id:  \d+
+
+astra_shared_project_add_user:
+    path:     /add-user-post
+    defaults: { _controller: AstraSharedBundle:Projects:UsersAddPost }
+
+astra_shared_project_mod_user:
+    path:     /mod-user-post
+    defaults: { _controller: AstraSharedBundle:Projects:UsersModPost }
+
+astra_shared_project_remove_user:
+    path:     /remove-user-post
+    defaults: { _controller: AstraSharedBundle:Projects:UsersRemovePost }
+
+astra_shared_search_user_ajax:
+    path:     /user-add-ajax
+    defaults: { _controller: AstraSharedBundle:Projects:SearchAddUsersAjax}
+
+astra_shared_project_view_files:
+    path:     /view/{id}/files/{directory}
+    defaults: { _controller: AstraSharedBundle:Projects:ViewFiles, directory: 0 }
+    requirements:
+      id:  \d+
+      directory:  \d+
+
+astra_shared_project_upload_file:
+    path:     /uploadload-file/{id}
+    defaults: { _controller: AstraSharedBundle:Projects:UploadFileForProject }
+    requirements:
+      id:  \d+
+
+astra_shared_project_add_directory:
+    path:     /add-directory
+    defaults: { _controller: AstraSharedBundle:Projects:CreateDirectoryForProject }
+
+astra_shared_project_task_list_agile:
+    path:     /view/{id}/agile
+    defaults: { _controller: AstraSharedBundle:Projects:TaskListAgile }
+    requirements:
+      id:  \d+
+
+astra_shared_project_task_list_view:
+    path:     /view/{id}/task-list-ajax
+    defaults: { _controller: AstraSharedBundle:Projects:TaskListView }
+    requirements:
+      id:  \d+
+
+astra_shared_project_task_add:
+    path:     /view/{id}/task-add
+    defaults: { _controller: AstraSharedBundle:Projects:TaskEdit}
+    requirements:
+      id:  \d+
+
+astra_shared_project_task_edit:
+    path:     /view/{id}/task-mod/{taskId}
+    defaults: { _controller: AstraSharedBundle:Projects:TaskEdit}
+    requirements:
+      id:  \d+
+      taskId:  \d+
+
+astra_shared_project_task_view:
+    path:     /view/{id}/task/{task}
+    defaults: { _controller: AstraSharedBundle:Projects:TaskView }
+    requirements:
+      id:  \d+
+      task:  \d+
+
+astra_shared_project_task_list_calendar:
+    path:     /view/{id}/calendar
+    defaults: { _controller: AstraSharedBundle:Projects:TaskListCalendar }
+    requirements:
+      id:  \d+
+
+astra_shared_project_chat:
+    path:     /view/{id}/chat
+    defaults: { _controller: AstraSharedBundle:Projects:Chat }
+    requirements:
+      id:  \d+

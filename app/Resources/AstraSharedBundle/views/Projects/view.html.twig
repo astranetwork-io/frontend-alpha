@@ -1,0 +1,176 @@
+{% extends "::body_main.html.twig" %}
+{% block title %}{{ 'projects.detail' | trans }} "{{ project.name }}"{% endblock %}
+{% block caption %}{{ 'projects.detail' | trans }}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="wrapper wrapper-content animated fadeInUp">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="m-b-md">
+                                    <a href="{{ path('astra_shared_project_edit', {'id':project.id}) }}"
+                                       class="btn btn-white btn-xs pull-right">{{ 'projects.editProject' | trans }}</a>
+                                    <h2>{{ project.name }}</h2>
+                                </div>
+                                <dl class="dl-horizontal">
+                                    <dt>{{ 'projects.status' | trans }}:</dt>
+                                    <dd><span class="label label-primary">Active</span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <dl class="dl-horizontal">
+                                    {% if project.author %}
+                                        <dt>{{ 'projects.author' | trans }}:</dt>
+                                        <dd>{{ shared.UserName(project.author) | trim }}</dd>{% endif %}
+                                    <dt>{{ 'projects.numMessages' | trans }}:</dt>
+                                    <dd> 162</dd>
+                                </dl>
+                            </div>
+                            <div class="col-lg-7" id="cluster_info">
+                                <dl class="dl-horizontal">
+
+                                    <dt>{{ 'projects.lastActivity' | trans }}:</dt>
+                                    <dd>16.08.2014 12:15:57</dd>
+                                    <dt>{{ 'projects.created' | trans }}:</dt>
+                                    <dd>{{ project.created | date_time_format }}</dd>
+                                    <dt>{{ 'projects.participants' | trans }}:</dt>
+                                    <dd class="project-people">
+                                        {% for projectUser in project.users %}
+                                            <a href="{{ path('astra_profile_view',{'userName':projectUser.user.userName}) }}"
+                                               title="{{ shared.UserName(projectUser.user) | trim }}"><img alt="image" class="img-circle"
+                                                                                                           src="{{ UserPhoto(projectUser.user,'avatar_small') }}"></a>
+                                        {% endfor %}
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <dl class="dl-horizontal">
+                                    <dt>{{ 'projects.completed' | trans }}:</dt>
+                                    <dd>
+                                        <div class="progress progress-striped active m-b-sm">
+                                            <div style="width: 60%;" class="progress-bar"></div>
+                                        </div>
+                                        <small>{{ 'projects.completedIn' | trans }} <strong>60%</strong></small>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="row m-t-sm">
+                            <div class="col-lg-12">
+                                <div class="panel blank-panel">
+                                    <ul class="nav nav-tabs" id="tab-href">
+                                        <span class="pull-right small text-muted">1406 Elements</span>
+                                        {% if messageContainer %}<li data-url="{{ path('astra_chat_show_new', {'id':messageContainer.id,'template':'AstraSharedBundle:Projects:view_messages.html.twig'}) }}" class="active"><a href="#tab-1">{{ 'projects.menu.messages' | trans }}</a></li>{% endif %}
+                                        <li data-url="{{ path('astra_shared_project_task_list_view', {'id':project.id}) }}" class=""><a href="#tab-2">{{ 'projects.menu.tasks' | trans }}</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active indicated-palce" id="indicated-palce">
+                                            <div class="sk-spinner sk-spinner-double-bounce">
+                                                <div class="sk-double-bounce1"></div>
+                                                <div class="sk-double-bounce2"></div>
+                                            </div>
+                                            <div class="" id="tab-place">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="wrapper wrapper-content project-manager">
+                <h4>{{ 'projects.projectDescription' | trans }}</h4>
+                {% if project.logotype %}
+                    <img src="{{ publicImg(project.logotype.asset,'image_preview_middle') }}" class="img-responsive">
+                {% endif %}
+                <div class="small">{{ project.description | raw }}</div>
+                <h5>{{ 'projects.projectTag' | trans }}</h5>
+                <ul class="tag-list" style="padding: 0">
+                    <li><a href=""><i class="fa fa-tag"></i> Zender</a></li>
+                    <li><a href=""><i class="fa fa-tag"></i> Lorem ipsum</a></li>
+                    <li><a href=""><i class="fa fa-tag"></i> Passages</a></li>
+                    <li><a href=""><i class="fa fa-tag"></i> Variations</a></li>
+                </ul>
+                <h5>{{ 'projects.projectFiles' | trans }}</h5>
+                <ul class="list-unstyled project-files mass-uploadet-place">
+                    {% for fileProject in fileList %}
+                        {% set file = fileProject.file %}
+                        <li><a href="{{ publicFile(file.asset) }}" target="_blank">
+                                <i class="fa fa-file{% if file.type == 'image' %}-picture-o{% endif %}"></i>
+                                {{ file.name }}
+                            </a></li>
+                    {% endfor %}
+                </ul>
+                <div class="text-center m-t-md">
+                    <form method="post" enctype="multipart/form-data" action="{{ path('astra_shared_project_upload_file',{id: project.id}) }}" class="dropzone" id="dropzone">
+                        <div class="fallback">
+                            <input name="file" type="file"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(function () {
+            activeTab.init($('#tab-href').find('li'),$('#tab-place'),$('#indicated-palce'), function () {});
+            var active = $('#tab-href').find('li.active');
+            if(active.length==1)activeTab.refresh(active);
+        });
+    </script>
+    <script>
+        Dropzone.options.dropzone = {
+            params: {'public': 1, 'directory': 'public'},
+            dictDefaultMessage: "{{ 'dropzone.dictDefaultMessage' | trans }}",
+            paramName: "file",
+            maxFilesize: 2,
+            createImageThumbnails: false,
+            init: function () {
+                this.on("success", function (file, responce) {
+                    if
+                    (
+                        (responce.success == undefined)
+                        || (responce.message == undefined)
+                        || (responce.filename == undefined)
+                        || (responce.url == undefined)
+                        || (responce.type == undefined)
+                    ) {
+                        this.emit(Dropzone.ERROR, file, 'Wrong server ansver', file.xhr);
+                        return;
+                    }
+
+                    if (!responce.success) {
+                        this.emit(Dropzone.ERROR, file, responce.message, file.xhr);
+                        return;
+                    }
+
+                    this.removeFile(file);
+
+                    var classItem = 'fa-file';
+                    if (responce.type == 'image') classItem = classItem + '-picture-o';
+                    var itemPole = $(
+                        '<li><a href="' + responce.url + '" target="_blank">' +
+                        '<i class="fa ' + classItem + '"></i>' +
+                        responce.filename +
+                        '</a></li>'
+                    );
+
+                    $('.mass-uploadet-place').append(itemPole);
+                });
+            }
+        };
+    </script>
+{% endblock %}

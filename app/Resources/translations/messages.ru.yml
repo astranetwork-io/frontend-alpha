@@ -1,0 +1,259 @@
+copyright: 'ASTRA © 2018'
+name: 'ASTRA'
+serachAll: 'Поиск везде'
+textLogo: 'ᴁ'
+unknownError: 'Неизвестная ошибка'
+
+dropzone:
+  dictDefaultMessage: 'Перетащите файлы сюда, или нажмите на это поле для загрузки файлов'
+  defaultError: 'Если вы видите это - напишите разработчику'
+  fileNotLoadet: 'Файл не загружен'
+  wrongTypeFile: 'Данный формат нельзя загрузить'
+
+form:
+  selectFile: 'Выбрать файл'
+  changeFile: 'Изменить файл'
+  doSave: 'Сохранить'
+  doReset: 'Сброс'
+
+login:
+  bigName: 'ASTRA'
+  welcome: 'Шаг в будущее'
+  slogan: 'Добро пожаловать'
+  loginFor: 'Войдите для использования'
+  submit: 'Вход'
+  rememberMe: 'запомнить меня'
+  resetPassword: 'Забыли пароль?'
+  doNotHaveAccount: 'Ещё не с нами?'
+  doCreateAccount: 'Присоединиться'
+
+register:
+  welcome: 'Регистрация в ASTRA'
+  slogan: 'Ваш первый шаг в будущее'
+  agreeTerms: 'Я принимаю условия использования'
+  doRegister: 'Регистрация'
+  alreadyHaveAccount: 'Уже с нами?'
+  toLogin: 'К форме входа'
+
+resetting:
+  welcome: 'Восстановление доступа'
+  username: 'Имя пользователя или email'
+  submit: 'Запросить сброс пароля'
+  check_email: |
+          Письмо отправлено. Оно содержит ссылку, при переходе по которой ваш пароль будет сброшен.
+          Заметьте, вы сможете запросить новый пароль только через %tokenLifetime% часов.
+
+          Если вы не получили письмо, проверьте папку Спам или попробуйте снова.
+
+user:
+  viewProfile: 'Профиль пользователя %username%'
+  viewMyProfile: 'Мой профиль'
+  username: 'Имя пользователя'
+  password: 'Пароль'
+  passwordConfirm: 'Пароль ещё раз'
+  email: 'Электронная почта'
+  name: 'Имя'
+  surname: 'Фамилия'
+  birthday: 'День рождения'
+  skype: 'Skype'
+  phone: 'Телефон'
+  avatar: 'Фото'
+  avatarChange: 'Сменить фото'
+  status: 'Статус'
+  aboutMe: 'Обо мне'
+  notFound: 'Пользователь не найден'
+
+menu:
+  myProfile: 'Профиль'
+  myProfileEdit: 'Редактировать профиль'
+  logout: 'Выход'
+
+main_menu:
+  cabinet:
+    name: 'Кабинет'
+    profile: 'Профиль'
+    contacts: 'Контакты'
+    tasks: 'Задачи'
+    calendar: 'Календарь'
+    posts: 'Сообщения'
+    files: 'Файлы'
+
+  projects:
+    name: 'Проекты'
+    users: 'Пользователи'
+    create: 'Создать'
+    list: 'Список'
+    mosaic: 'Мозайка'
+    files: 'Файлы'
+    tasks: 'Задачи'
+    taskAdd: 'Добавить задачу'
+    taskView: 'Просмотр задачи'
+    calendar: 'Календарь'
+    messages: 'Сообщения'
+    view: 'Просмотр проекта'
+    edit: 'Редактироать проект'
+
+  finance:
+    name: 'Финансы'
+    summary: 'Сводная'
+    orders: 'Счета'
+    transfer: 'Перевод'
+    exchange: 'Биржа'
+
+  job:
+    name: 'Работа'
+    myResume: 'Мои Резюме'
+    myVacancy: 'Мои Вакансии'
+    allResume: 'База Резюме'
+    allVacancy: 'База Вакансий'
+
+myProfile:
+  name: 'Моя страница'
+  view: 'Профиль'
+  edit: 'Редактировать'
+  finance: 'Финансы'
+  aboutMe: 'О себе'
+  files: 'Мои файлы'
+  agile:
+    name: 'Мои задачи'
+    add: 'Добавить задачу'
+    view: 'Просмотр задачи'
+
+
+finance:
+  myWalletAmount: 'У вас на счету'
+  myWalletDoDeposit: 'Пополнить счёт'
+  myWalletDeposit: 'Пополнение кошелька'
+  myWallets: 'Мои кошельки'
+  wallet: 'Кошелёк'
+  walletName: 'Название'
+  walletNumber: 'Номер кошелька'
+  targetWalletNumber: 'Номер кошелька назначения'
+  walletBalance: 'Баланс'
+  walletAdd: 'Добавить кошелёк'
+  walletAddAction: 'Создание кошелька'
+  doTransfer: 'Перевести'
+  deposit:
+    amount: 'Сумма'
+    set_amount: 'Укажите сумму пополнения'
+    errors:
+      wiseWallets: 'Кошельки должны быть разными'
+      lowAmount: 'Сумма должна быть положительной'
+      noWallets: 'Нужно указать минимум один кошелёк'
+      noFindWallets: 'Не удалось найти кошелёк для пользователя'
+      noSetTargetNumber: 'Неуказан счёт получателя'
+      wrongSetTargetNumber: 'Неверный номер получателя'
+      noMoney: 'На счету нет нужной суммы'
+  transaction:
+    isConfirmed: 'Трансакция подтверждена.'
+    date: 'Дата'
+    dateConfirmed: 'Дата подтверждения'
+
+search:
+    result: 'Результаты поиска'
+    resultBy: 'Найдено по запросу'
+    name: 'Страница поиска'
+    buttonName: 'Поиск'
+
+projects:
+  projectNotFound: 'Проект не найден'
+  refresh: 'обновить'
+  projectList: 'Список проектов'
+  AllUserAssignedProject: 'Все проекты, связанные с пользователем'
+  addProject: 'Создать проект'
+  editProject: 'Редактировать проект'
+  description: 'Описание'
+  name: 'Название'
+  tags: 'Тэги'
+  newLogotype: 'Логотип'
+  deathline: 'Дата окончания проекта'
+  detail: 'Просмотр проекта'
+  status: 'Статус'
+  author: 'Автор'
+  employee: 'Cотрудник'
+  post: 'Должность'
+  numMessages: 'Кол-во сообщений'
+  lastActivity: 'Последняя активность'
+  created: 'Создан'
+  participants: 'Участники'
+  completed: 'Завершено'
+  completedIn: 'Проект завершён на'
+  projectDescription: 'Описание проекта'
+  projectTag: 'Тэги проекты'
+  projectFiles: 'Файлы проекта'
+  addFiles: 'Загрузить файлы'
+  isDirectoryNotInProject: 'Эта директория не подключена к проекту'
+  isUserNotInProject: 'Этот пользователь не входит в проект'
+  isUserNotFound: 'Пользователь не найден'
+  isUserAlreadyInProject: 'Этот пользователь уже в проекте'
+  dinedAuthorForRemove: 'Нельзя удалить автора проекта'
+  menu:
+    messages: 'Сообщения'
+    tasks: 'Задачи'
+    users: 'Пользователи'
+  agile:
+    name: 'Задачи проекта'
+    add: 'Добавить задачу для проекта'
+    view: 'Просмотр задачи проекта'
+  users:
+    name: 'Пользователи проекта'
+
+fileManager:
+  show: 'Показывать'
+  all: 'Все'
+  documents: 'Документы'
+  audio: 'Аудио'
+  images: 'Изображения'
+  folders: 'Директории'
+  tags: 'Теги'
+  added: 'Загружен'
+  addDirectory: 'Создать директорию'
+  directoryName: 'Название директории'
+  uploadingDirectoryNotFound: 'Директория не найдена'
+  directoryNameIsEmpty: 'Имя директории пусто'
+  isDirectoryNotAllowForUser: 'Эта директория недоступна пользователю'
+
+task:
+  notFound: 'Задача не найдена'
+  tags: 'Теги'
+  files: 'Файлы'
+  caption: 'Название'
+  description: 'Описание'
+  created: 'Дата создание'
+  startWork: 'Начало работ'
+  endWork: 'Конец работ'
+  isCalendar: 'В календарь'
+  worker: 'Исполнитель'
+  author: 'Автор'
+  status: 'Статус'
+  dragToList: 'Перетаскивайте задачи между списками для смены статуса'
+  addNewTask: 'Создать новую задачу'
+  addTask: 'Создать задачу'
+  editTask: 'Изменить задачу'
+  statusNames:
+    todo: 'К исполнению'
+    process: 'В работе'
+    compleet: 'Готово'
+  agile:
+    reorder:
+      defaultError: 'Неизвестная ошибка. Сообщите разработчику'
+      notFoundList: 'Список задач отсутствует'
+      wrongDataFormat: 'Список задач отсутствует'
+  calendar:
+    formatError: 'Ошибка в расположении задач.'
+    updateError: 'Ошибка при обновлении.'
+    wrongData: 'Неправильный запрос.'
+    wrongTask: 'Задача отсутствует.'
+
+chat:
+  loadMoreOld: 'Загрузить ещё...'
+  addFiles: 'Добавить файлы'
+
+contacts:
+  add_contact: 'Добавить в список контактов'
+  show_contact: 'Перейти к переписке'
+  contact_with: 'Личные сообщения с'
+  name: 'Контакты'
+  my: 'Мои контакты'
+  find: 'Поиск пользователей'
+  messages: 'Сообщения'

@@ -1,0 +1,9 @@
+{% import "shared_macro.html.twig" as shared %}
+{% for user in users %}
+    <div class="chat-user">
+        <img class="chat-avatar" src="{{ UserPhoto(user,'avatar_small') }}" alt="">
+        <div class="chat-user-name">
+            <a href="{{ path('astra_profile_view',{'userName':user}) }}">{{ shared.UserName(user) | trim }}</a>
+        </div>
+    </div>
+{% endfor %}

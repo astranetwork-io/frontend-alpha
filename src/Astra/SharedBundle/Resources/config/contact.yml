@@ -1,0 +1,35 @@
+astra_contact_quick_message:
+    path:     /quick-message
+    defaults: { _controller: AstraSharedBundle:Contact:quickAddMessage}
+
+astra_contact_add_quick_new:
+    path:     /quick-add/{userId}
+    defaults: { _controller: AstraSharedBundle:Contact:addQuickContactList}
+    requirements:
+      userId:  \d+
+
+astra_contact_view_chat:
+    path:     /view/{chatId}
+    defaults: { _controller: AstraSharedBundle:Contact:viewChat}
+    requirements:
+      chatId:  \d+
+
+astra_contacts_index:
+    path:     /index
+    defaults: { _controller: AstraSharedBundle:Contact:contactsList}
+
+astra_contacts_index_ajax:
+    path:     /index-ajax
+    defaults: { _controller: AstraSharedBundle:Contact:contactsListAjax}
+
+astra_users_index_ajax:
+    path:     /index-ajax-users
+    defaults: { _controller: AstraSharedBundle:Contact:usersListAjax}
+
+astra_contacts_messages_index:
+    path:     /messages
+    defaults: { _controller: AstraSharedBundle:Contact:allMessagesList}
+
+astra_contacts_messages_ajax:
+    path:     /messages-ajax
+    defaults: { _controller: AstraSharedBundle:Contact:allMessagesListAjax}

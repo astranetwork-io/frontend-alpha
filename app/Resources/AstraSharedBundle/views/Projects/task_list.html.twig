@@ -1,0 +1,11 @@
+<div class="MyTaskList">
+    {% for statusName, order in statusList %}
+        {% for itemList in agileList[statusName] | default([]) %}
+            <div class="item">
+                <div class="caption"> <a href="{{ path('astra_shared_project_task_view',{'task':itemList.task.id,'id':project.id}) }}">{{ itemList.task.caption }}</a></div>
+                <div class="text">{{ itemList.task.description | replace({'<br>': "\n"}) | striptags | nl2br}}</div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+

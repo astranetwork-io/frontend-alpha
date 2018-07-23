@@ -1,0 +1,13 @@
+{% extends 'body_main.html.twig' %}
+{% block body %}
+<div class="tabs-container">
+    {{ knp_menu_render(tab_menu_name, {'currentClass':'active', 'template': 'Menu/tab_menu.html.twig'}) }}
+    <div class="tab-content">
+        <div class="tab-pane active">
+            <div class="panel-body">
+                {% block body_content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

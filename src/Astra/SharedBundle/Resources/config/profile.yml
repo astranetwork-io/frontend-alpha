@@ -1,0 +1,7 @@
+astra_profile_my_view:
+    path:     /
+    defaults: { _controller: AstraSharedBundle:Profile:view, page: 0}
+
+astra_profile_view:
+    path:     /{userName}
+    defaults: { _controller: AstraSharedBundle:Profile:view}

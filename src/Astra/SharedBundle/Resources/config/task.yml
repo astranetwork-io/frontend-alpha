@@ -1,0 +1,21 @@
+astra_shared_agile_reorder:
+    path:     /agile-list-reorder
+    defaults: { _controller: AstraSharedBundle:Task:reorderAgileList }
+
+astra_shared_task_upload_file:
+    path:     /uploadload-file/{id}
+    defaults: { _controller: AstraSharedBundle:Task:UploadFileForTask }
+    requirements:
+      id:  \d+
+
+astra_shared_task_calendar_project_loader:
+    path:     /calendar-project-loader
+    defaults: { _controller: AstraSharedBundle:Task:loadProjectCalendar }
+
+astra_shared_task_calendar_user_loader:
+    path:     /calendar-user-loader
+    defaults: { _controller: AstraSharedBundle:Task:loadUserCalendar }
+
+astra_shared_task_calendar_update:
+    path:     /calendar-updater
+    defaults: { _controller: AstraSharedBundle:Task:updateCalendar }

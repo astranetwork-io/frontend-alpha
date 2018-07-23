@@ -1,0 +1,1 @@
+php bin/console doctrine:generate:entities Astra --no-backup

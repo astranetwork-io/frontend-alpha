@@ -1,0 +1,143 @@
+{% extends "::body_main.html.twig" %}
+{% block title %}{{ 'projects.agile.view' | trans }} "{{ project.name }}"{% endblock %}
+{% block caption %}{{ 'projects.agile.view' | trans }} "<a href="{{ path('astra_shared_project_view',{'id':project.id}) }}">{{ project.name }}</a>"{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="wrapper wrapper-content animated fadeInUp">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="m-b-md">
+                                    <a href="{{ path('astra_shared_project_task_edit', {'id':project.id, 'taskId':task.id}) }}"
+                                       class="btn btn-white btn-xs pull-right">{{ 'task.editTask' | trans }}</a>
+                                    <h2>{{ task.caption }}</h2>
+                                </div>
+                                <dl class="dl-horizontal">
+                                    <dt>{{ 'task.status' | trans }}:</dt>
+                                    <dd><span class="label label-primary">{{ ('task.statusNames.'~task.status) | trans }}</span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <dl class="dl-horizontal">
+                                    <dt>{{ 'task.author' | trans }}:</dt>
+                                    <dd><a href="{{ path('astra_profile_view',{'userName':task.author.userName}) }}">{{ task.author.fullUserName }}</a></dd>
+                                    <dt>{{ 'task.created' | trans }}:</dt> <dd>{{ task.created | date_time_format }}</dd>
+                                </dl>
+                            </div>
+                            <div class="col-lg-7" id="cluster_info">
+                                <dl class="dl-horizontal">
+                                    {% if task.worker %}
+                                        <dt>{{ 'task.worker' | trans }}:</dt>
+                                        <dd><a href="{{ path('astra_profile_view',{'userName':task.worker.userName}) }}">{{ task.worker.fullUserName }}</a></dd>
+                                    {% endif %}
+                                    <dt>{{ 'task.startWork' | trans }}:</dt> <dd>{{ task.startWork | date_time_format }}</dd>
+                                    <dt>{{ 'task.endWork' | trans }}:</dt> <dd>{{ task.endWork | date_time_format }}</dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <dl class="dl-horizontal">
+                                    <dt>{{ 'projects.completed' | trans }}:</dt>
+                                    <dd>
+                                        <div class="progress progress-striped active m-b-sm">
+                                            <div style="width: 60%;" class="progress-bar"></div>
+                                        </div>
+                                        <small>{{ 'projects.completedIn' | trans }} <strong>60%</strong></small>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <dl class="dl-horizontal">
+                                    <dt>{{ 'task.description' | trans }}:</dt>
+                                    <dd>
+                                        {{ task.description | raw }}
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="wrapper wrapper-content project-manager">
+                <h5>{{ 'task.tags' | trans }}</h5>
+                <ul class="tag-list" style="padding: 0">
+                    <li><a href=""><i class="fa fa-tag"></i> Zender</a></li>
+                    <li><a href=""><i class="fa fa-tag"></i> Lorem ipsum</a></li>
+                    <li><a href=""><i class="fa fa-tag"></i> Passages</a></li>
+                    <li><a href=""><i class="fa fa-tag"></i> Variations</a></li>
+                </ul>
+                <h5>{{ 'task.files' | trans }}</h5>
+                <ul class="list-unstyled project-files mass-uploadet-place">
+                    {% for fileTask in task.files %}
+                        {% set file = fileTask.file %}
+                        <li><a href="{{ publicFile(file.asset) }}" target="_blank">
+                                <i class="fa fa-file{% if file.type == 'image' %}-picture-o{% endif %}"></i>
+                                {{ file.name }}
+                            </a></li>
+                    {% endfor %}
+                </ul>
+                <div class="text-center m-t-md">
+                    <form method="post" enctype="multipart/form-data" action="{{ path('astra_shared_task_upload_file',{id: task.id}) }}" class="dropzone" id="dropzone">
+                        <div class="fallback">
+                            <input name="file" type="file"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        Dropzone.options.dropzone = {
+            params: {'public': 0, 'directory': 'task'},
+            dictDefaultMessage: "{{ 'dropzone.dictDefaultMessage' | trans }}",
+            paramName: "file",
+            maxFilesize: 2,
+            createImageThumbnails: false,
+            init: function () {
+                this.on("success", function (file, responce) {
+                    if
+                    (
+                        (responce.success == undefined)
+                        || (responce.message == undefined)
+                        || (responce.filename == undefined)
+                        || (responce.url == undefined)
+                        || (responce.type == undefined)
+                    ) {
+                        this.emit(Dropzone.ERROR, file, 'Wrong server ansver', file.xhr);
+                        return;
+                    }
+
+                    if (!responce.success) {
+                        this.emit(Dropzone.ERROR, file, responce.message, file.xhr);
+                        return;
+                    }
+
+                    this.removeFile(file);
+
+                    var classItem = 'fa-file';
+                    if (responce.type == 'image') classItem = classItem + '-picture-o';
+                    var itemPole = $(
+                        '<li><a href="' + responce.url + '" target="_blank">' +
+                        '<i class="fa ' + classItem + '"></i>' +
+                        responce.filename +
+                        '</a></li>'
+                    );
+
+                    $('.mass-uploadet-place').append(itemPole);
+                });
+            }
+        };
+    </script>
+{% endblock %}

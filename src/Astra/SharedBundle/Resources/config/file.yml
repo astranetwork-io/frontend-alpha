@@ -1,0 +1,3 @@
+astra_file_upload:
+    path:     /new
+    defaults: { _controller: AstraSharedBundle:File:UploadFile}

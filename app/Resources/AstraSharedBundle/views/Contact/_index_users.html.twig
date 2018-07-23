@@ -1,0 +1,9 @@
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <tbody>
+            {% for user in users %}
+                {% include 'AstraSharedBundle:Contact:_index_user_item.html.twig' with {'user':user,'contactList':contactList[user.id]} %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

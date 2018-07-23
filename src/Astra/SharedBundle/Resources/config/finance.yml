@@ -1,0 +1,36 @@
+astra_shared_finance_my_wallet:
+    path:     /
+    defaults: { _controller: AstraSharedBundle:Finance:MyWallet }
+
+astra_shared_finance_deposit:
+    path:     /deposit/{wallet}
+    defaults: { _controller: AstraSharedBundle:Finance:Deposit }
+    requirements:
+        wallet:  \d+
+
+astra_shared_finance_confirm_deposit:
+    path:     /confirm-deposit/{id}
+    defaults: { _controller: AstraSharedBundle:Finance:ConfirmDeposit }
+    requirements:
+        id:  \d+
+
+astra_shared_finance_my_wallets:
+    path:     /my-wallets
+    defaults: { _controller: AstraSharedBundle:Finance:MyWallets }
+
+astra_shared_finance_my_wallet_add:
+    path:     /my-wallets-add
+    defaults: { _controller: AstraSharedBundle:Finance:MyWalletsAdd }
+
+astra_shared_finance_transaction:
+    path:     /transaction
+    defaults: { _controller: AstraSharedBundle:Finance:Transaction }
+
+astra_shared_finance_exchange:
+    path:     /exchange
+    defaults: { _controller: AstraSharedBundle:Finance:Exchange }
+
+astra_shared_finance_statistics:
+    path:     /statistics
+    defaults: { _controller: AstraSharedBundle:Finance:Statistics }
+

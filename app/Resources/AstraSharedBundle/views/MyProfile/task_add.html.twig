@@ -1,0 +1,20 @@
+{% extends "::body_main.html.twig" %}
+{% form_theme form 'Form/base_style.html.twig' %}
+{% block title %}{{ 'myProfile.agile.add' | trans }}{% endblock %}
+{% block caption %}{{ 'myProfile.agile.add' | trans }}{% endblock %}
+
+{% block body %}
+    <div class="ibox float-e-margins">
+        <div class="ibox-content p-md">
+            {{ form_start(form, {'method': 'post', 'action': '', 'attr': {'class': 'form-horizontal'}}) }}
+            {{ form_widget(form) }}
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <div class="col-sm-4 col-sm-offset-2">
+                    <button class="btn btn-primary" type="submit">{{ 'form.doSave' | trans }}</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+astra_myprofile_view:
+    path:     /
+    defaults: { _controller: AstraSharedBundle:MyProfile:View }
+
+astra_myprofile_edit:
+    path:     /edit
+    defaults: { _controller: AstraSharedBundle:MyProfile:Edit }
+
+astra_myprofile_about_me:
+    path:     /edit/about
+    defaults: { _controller: AstraSharedBundle:MyProfile:EditAbout }
+
+astra_myprofile_files:
+    path:     /files
+    defaults: { _controller: AstraSharedBundle:MyProfile:fileManager}
+
+astra_myprofile_files_add_dir:
+    path:     /files-add-dir
+    defaults: { _controller: AstraSharedBundle:MyProfile:CreateDirectoryForUser}
+
+astra_myprofile_task_list_agile:
+    path:     /agile
+    defaults: { _controller: AstraSharedBundle:MyProfile:TaskListAgile }
+
+astra_myprofile_task_add:
+    path:     /task-add
+    defaults: { _controller: AstraSharedBundle:MyProfile:TaskEdit, task: 0}
+
+astra_myprofile_task_edit:
+    path:     /task-mod/{task}
+    defaults: { _controller: AstraSharedBundle:MyProfile:TaskEdit}
+    requirements:
+      task:  \d+
+
+astra_myprofile_task_view:
+    path:     /task/{task}
+    defaults: { _controller: AstraSharedBundle:MyProfile:TaskView }
+    requirements:
+      task:  \d+
+
+astra_myprofile_task_list_calendar:
+    path:     /calendar
+    defaults: { _controller: AstraSharedBundle:MyProfile:TaskListCalendar }

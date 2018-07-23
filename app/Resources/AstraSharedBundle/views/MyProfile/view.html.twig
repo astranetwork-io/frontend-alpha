@@ -1,0 +1,32 @@
+{% extends "AstraSharedBundle:MyProfile:layout.html.twig" %}
+{% block title %}{{ 'myProfile.name' | trans }} - {{ 'myProfile.view' | trans }}{% endblock %}
+{% block caption %}{{ 'myProfile.name' | trans }} - {{ 'myProfile.view' | trans }}{% endblock %}
+{% block body_content %}
+    <div class="profile-image-holder">
+        <img class="img-circle"  src="{{ UserPhoto(CurrentUser(),'avatar_big') }}">
+    </div>
+
+    <div  class="form-horizontal profile-data-holder">
+        <div class="form-group"><label class="col-lg-6 control-label">{{ 'user.username' | trans }}</label>
+            <div class="col-lg-6"><p class="form-control-static">{{ CurrentUser().username }}</p></div>
+        </div>
+        <div class="form-group"><label class="col-lg-6 control-label">{{ 'user.surname' | trans }}</label>
+            <div class="col-lg-6"><p class="form-control-static">{{ CurrentUser().surname }}</p></div>
+        </div>
+        <div class="form-group"><label class="col-lg-6 control-label">{{ 'user.name' | trans }}</label>
+            <div class="col-lg-6"><p class="form-control-static">{{ CurrentUser().name }}</p></div>
+        </div>
+        <div class="form-group"><label class="col-lg-6 control-label">{{ 'user.email' | trans }}</label>
+            <div class="col-lg-6"><p class="form-control-static">{{ CurrentUser().email }}</p></div>
+        </div>
+        <div class="form-group"><label class="col-lg-6 control-label">{{ 'user.skype' | trans }}</label>
+            <div class="col-lg-6"><p class="form-control-static">{{ CurrentUser().skype }}</p></div>
+        </div>
+        <div class="form-group"><label class="col-lg-6 control-label">{{ 'user.phone' | trans }}</label>
+            <div class="col-lg-6"><p class="form-control-static">{{ CurrentUser().phone }}</p></div>
+        </div>
+        <div class="form-group"><label class="col-lg-6 control-label">{{ 'user.birthday' | trans }}</label>
+            <div class="col-lg-6"><p class="form-control-static">{{ CurrentUser().birthday | date_format }}</p></div>
+        </div>
+    </div>
+{% endblock %}

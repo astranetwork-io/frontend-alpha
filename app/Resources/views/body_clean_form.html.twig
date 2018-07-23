@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block body_tag %}
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        {% block body %}{% endblock %}
+    </div>
+    <!-- Mainly scripts -->
+    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    {% block javascripts %}{% endblock %}
+</body>
+{% endblock %}

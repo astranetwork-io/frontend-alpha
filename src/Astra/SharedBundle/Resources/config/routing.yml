@@ -1,0 +1,43 @@
+astra_shared_profile:
+    resource: "@AstraSharedBundle/Resources/config/profile.yml"
+    prefix:   /profile
+
+astra_shared_myprofile:
+    resource: "@AstraSharedBundle/Resources/config/myprofile.yml"
+    prefix:   /myprofile
+
+astra_shared_finance:
+    resource: "@AstraSharedBundle/Resources/config/finance.yml"
+    prefix:   /finance
+
+astra_shared_search:
+    resource: "@AstraSharedBundle/Resources/config/search.yml"
+    prefix:   /search
+
+astra_shared_project:
+    resource: "@AstraSharedBundle/Resources/config/project.yml"
+    prefix:   /project
+
+astra_shared_tag:
+    resource: "@AstraSharedBundle/Resources/config/tag.yml"
+    prefix:   /tag
+
+astra_shared_task:
+    resource: "@AstraSharedBundle/Resources/config/task.yml"
+    prefix:   /task
+
+astra_shared_chat:
+    resource: "@AstraSharedBundle/Resources/config/chat.yml"
+    prefix:   /chat
+
+astra_shared_file:
+    resource: "@AstraSharedBundle/Resources/config/file.yml"
+    prefix:   /file
+
+astra_shared_contact:
+    resource: "@AstraSharedBundle/Resources/config/contact.yml"
+    prefix:   /contact
+
+astra_shared_homepage:
+    path:     /
+    defaults: { _controller: AstraSharedBundle:Default:index }

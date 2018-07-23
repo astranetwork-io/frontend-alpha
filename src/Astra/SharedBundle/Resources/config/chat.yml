@@ -1,0 +1,11 @@
+astra_chat_show_new:
+    path:     /new/{id}
+    defaults: { _controller: AstraSharedBundle:Chat:showNewMessages}
+    requirements:
+      id:  \d+
+
+astra_chat_post:
+    path:     /post/{id}
+    defaults: { _controller: AstraSharedBundle:Chat:postMessage}
+    requirements:
+      id:  \d+

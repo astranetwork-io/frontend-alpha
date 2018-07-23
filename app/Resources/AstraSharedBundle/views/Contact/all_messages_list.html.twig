@@ -1,0 +1,44 @@
+{% extends "::body_main.html.twig" %}
+{% block title %}{{ 'contacts.messages' | trans }}{% endblock %}
+{% block caption %}{{ 'contacts.messages' | trans }}{% endblock %}
+{% block body %}
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="ibox chat-view">
+
+                    <div class="ibox-title">
+                        <small class="pull-right text-muted">Last message: Mon Jan 26 2015 - 18:39:23</small>
+                        Chat room panel
+                    </div>
+
+
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="chat-discussion" id="message_list">
+                                    <div class="LoadMorePlace ">
+                                        <button class="LoadMoreButton">{{ 'chat.loadMoreOld' | trans }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(function () {
+            var ChatItem = new Chat($('#message_list'), null, null, null,'{{ path('astra_contacts_messages_ajax') }}');
+            ChatItem.start();
+        });
+    </script>
+{% endblock %}

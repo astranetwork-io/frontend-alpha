@@ -1,0 +1,17 @@
+{% import "shared_macro.html.twig" as shared %}
+<tr>
+    <td class="client-avatar">
+        <img alt="image" src="{{  UserPhoto(user,'avatar_small') }}">
+    </td>
+    <td>{{ user.getFullUserName }}</td>
+    <td> Tellus Institute</td>
+    <td class="contact-type"><i class="fa fa-envelope"> </i></td>
+    <td> gravida@rbisit.com</td>
+    <td class="client-status">
+        {% if contactList %}
+            <a  class="btn btn-primary btn-xs">{{ 'contacts.show_contact' | trans }}</a>
+        {% else %}
+            <a href="{{ path('astra_contact_add_quick_new',{userId:user.id}) }}" class="btn btn-warning btn-xs">{{ 'contacts.add_contact' | trans }}</a>
+        {% endif %}
+    </td>
+</tr>

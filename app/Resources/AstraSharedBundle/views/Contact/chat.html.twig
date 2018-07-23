@@ -1,0 +1,147 @@
+{% extends "::body_main.html.twig" %}
+{% block title %}{{ 'contacts.contact_with' | trans }} {{ activeContact.getFullName }}{% endblock %}
+{% block caption %}{{ 'contacts.contact_with' | trans }} {{ activeContact.getFullName }}{% endblock %}
+{% block body %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Chat view</h2>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="ibox chat-view">
+
+                    <div class="ibox-title">
+                        <small class="pull-right text-muted">Last message: Mon Jan 26 2015 - 18:39:23</small>
+                        Chat room panel
+                    </div>
+
+
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="chat-discussion" id="message_list">
+                                    <div class="LoadMorePlace ">
+                                        <button class="LoadMoreButton">{{ 'chat.loadMoreOld' | trans }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="chat-users">
+                                    <div class="users-list" id="users_list">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <form method="post" action="{{ path('astra_chat_post',{id:messageContainer.id}) }}" id="chat_form">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="chat-message-form">
+                                        <div class="form-group">
+                                            <textarea class="form-control message-input" name="message" placeholder="Enter message text"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="background: #f3f3f4; padding-top: 0.5em;">
+                                <div class="col-sm-12">
+                                    <div class="activeLabelList" id="chatFile"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 text-right">
+                            <span data-toggle-subject="#addFileForm" class="toggle-controller small">{{ 'chat.addFiles' | trans }}</span>
+                        </div>
+                    </div>
+                    <div style="display: none;" id="addFileForm">
+                        <form method="post" enctype="multipart/form-data" action="{{ path('astra_file_upload') }}" class="dropzone" id="dropzone">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="chat-message-form">
+                                        <div class="form-group">
+                                            <div class="fallback">
+                                                <input name="file" type="file"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(function () {
+            var ChatItem = new Chat($('#message_list'), $('#users_list'), $('#chat_form'), $('#chatFile'),'{{ path('astra_chat_show_new',{id:messageContainer.id}) }}');
+            ChatItem.start();
+        });
+    </script>
+    <script>
+        Dropzone.options.dropzone = {
+            params: {'public': 1, 'directory': 'messages/id_{{ contactList.getId }}'},
+            dictDefaultMessage: "{{ 'dropzone.dictDefaultMessage' | trans }}",
+            paramName: "file",
+            maxFilesize: 2,
+            createImageThumbnails: false,
+            init: function () {
+                this.on("success", function (file, responce) {
+                    if
+                    (
+                        (responce.success == undefined)
+                        || (responce.message == undefined)
+                        || (responce.filename == undefined)
+                        || (responce.url == undefined)
+                        || (responce.type == undefined)
+                        || (responce.id == undefined)
+                    ) {
+                        this.emit(Dropzone.ERROR, file, 'Wrong server ansver', file.xhr);
+                        return;
+                    }
+
+                    if (!responce.success) {
+                        this.emit(Dropzone.ERROR, file, responce.message, file.xhr);
+                        return;
+                    }
+
+                    this.removeFile(file);
+
+                    var classItem = 'fa-file';
+                    if (responce.type == 'image') classItem = classItem + '-picture-o';
+                    var itemPole = $(
+
+                        '<span class="item">'+
+                        '<i class="fa ' + classItem + '"></i>'+
+                        '<span class="text"><a href="' + responce.url + '" target="_blank">'+responce.filename+'</a></span>'+
+                        '<span class="remove" onclick="$(this).closest(\'.item\').remove()"></span>'+
+                        '<span class="form">'+
+                        '<input type="text" name="files[]" value="'+responce.id+'"/>'+
+                        '</span>'+
+                        '</span>'
+                    );
+
+                    $('#chatFile').append(itemPole);
+                });
+            }
+        };
+    </script>
+{% endblock %}

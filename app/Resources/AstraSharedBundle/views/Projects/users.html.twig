@@ -1,0 +1,56 @@
+{% extends "::body_main.html.twig" %}
+{% block title %}{{ 'projects.users.name' | trans }} "{{ project.name }}"{% endblock %}
+{% block caption %}{{ 'projects.users.name' | trans }} "<a href="{{ path('astra_shared_project_view',{'id':project.id}) }}">{{ project.name }}</a>"{% endblock %}
+
+{% block body %}
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Select2 <small>https://select2.github.io/</small></h5>
+                    </div>
+                    <div id="form-add-user" data-project="{{ project.id }}" class="indicated-palce ibox-content">
+                        <div class="sk-spinner sk-spinner-double-bounce">
+                            <div class="sk-double-bounce1"></div>
+                            <div class="sk-double-bounce2"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <select class="create_new_user form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="user-item-list">
+            {% for projetUser in projetUsers %}
+                {% include 'AstraSharedBundle:Projects:_users_item.html.twig' with {'projetUser':projetUser} %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/project_userlist.js') }}"></script>
+    <script>
+        $(function () {
+            projectUserList.init($('#user-item-list'), $('#form-add-user'), $('.contact-box'),'{{ path('astra_shared_project_add_user') }}','{{ path('astra_shared_project_mod_user') }}','{{ path('astra_shared_project_remove_user') }}')
+        });
+    </script>
+    <script>
+        $(".create_new_user").select2(
+            {
+            ajax:
+                {
+                    url: "{{ path('astra_shared_search_user_ajax') }}",
+                    dataType: "json",
+                    delay: 250,
+                    data: function (params){return {q: params.term, page: params.page, projectId:{{project.id }}};},
+                    processResults: function (data, params){return { results: data, pagination:{ more: false }};},
+                    cache: false
+                },
+            minimumInputLength: 1
+            });
+    </script>
+{% endblock %}
