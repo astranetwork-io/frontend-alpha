@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * User
  *
  * @ORM\Table("users")
- * @ORM\Entity(repositoryClass="UserRepository")
+ * @ORM\Entity(repositoryClass="Astra\SharedBundle\Repository\UserRepository")
  */
 class User extends BaseUser
 {
@@ -83,31 +83,46 @@ class User extends BaseUser
      * @Doctrine\ORM\Mapping\OneToMany(targetEntity="Astra\SharedBundle\Entity\Task", mappedBy="author")
      * @var Task[]
      */
-    private $createdTasks = [];
+    protected $createdTasks;
 
     /**
      * @Doctrine\ORM\Mapping\OneToMany(targetEntity="Astra\SharedBundle\Entity\Task", mappedBy="worker")
      * @var Task[]
      */
-    private $workTasks = [];
+    protected $workTasks;
 
     /**
      * @Doctrine\ORM\Mapping\OneToMany(targetEntity="Astra\SharedBundle\Entity\TaskList", mappedBy="user")
      * @var TaskList[]
      */
-    private $taskList = [];
+    protected $taskList;
 
     /**
      * @Doctrine\ORM\Mapping\OneToMany(targetEntity="Astra\SharedBundle\Entity\Message", mappedBy="user")
      * @var Message[]
      */
-    private $my_messages = [];
+    protected $my_messages;
 
     /**
      * @Doctrine\ORM\Mapping\OneToMany(targetEntity="Astra\SharedBundle\Entity\Contact", mappedBy="user")
      * @var ArrayCollection
      */
-    private $contacts = [];
+    protected $contacts;
+
+    /**
+     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="Astra\SharedBundle\Entity\Contact", mappedBy="user")
+     * @var ArrayCollection
+     */
+
+    /**
+     * @var ArrayCollection
+     * @Doctrine\ORM\Mapping\ManyToMany(targetEntity="Astra\SharedBundle\Entity\UserRole")
+     * @Doctrine\ORM\Mapping\JoinTable(name="user_roles",
+     *      joinColumns={@Doctrine\ORM\Mapping\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@Doctrine\ORM\Mapping\JoinColumn(name="role_id", referencedColumnName="id", onDelete="CASCADE")}
+     *      )
+     */
+    protected $userRoles;
 
 
     public function __construct()
@@ -116,8 +131,9 @@ class User extends BaseUser
         $this->taskList = new ArrayCollection();
         $this->workTasks = new ArrayCollection();
         $this->createdTasks = new ArrayCollection();
-        $this->createdTasks = new ArrayCollection();
         $this->my_messages = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
+        $this->userRoles = new ArrayCollection();
     }
 
     /**
@@ -447,7 +463,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function addContact(\Astra\SharedBundle\Entity\Contact $contact)
+    public function addContact(Contact $contact)
     {
         $this->contacts[] = $contact;
 
@@ -459,7 +475,7 @@ class User extends BaseUser
      *
      * @param \Astra\SharedBundle\Entity\Contact $contact
      */
-    public function removeContact(\Astra\SharedBundle\Entity\Contact $contact)
+    public function removeContact(Contact $contact)
     {
         $this->contacts->removeElement($contact);
     }
@@ -473,4 +489,35 @@ class User extends BaseUser
     {
         return $this->contacts;
     }
+
+    /**
+     * @param UserRole $userRole
+     *
+     * @return self
+     */
+    public function addUserRole(UserRole $userRole)
+    {
+        $this->userRoles->add($userRole);
+
+        return $this;
+    }
+
+    /**
+     * @param UserRole $userRole
+     */
+    public function removeUserRole(UserRole $userRole)
+    {
+        $this->userRoles->removeElement($userRole);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserRole()
+    {
+        return $this->userRoles;
+    }
+
 }

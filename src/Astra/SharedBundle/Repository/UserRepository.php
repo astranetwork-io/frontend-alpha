@@ -1,6 +1,6 @@
 <?php
 
-namespace Astra\SharedBundle\Entity;
+namespace Astra\SharedBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
