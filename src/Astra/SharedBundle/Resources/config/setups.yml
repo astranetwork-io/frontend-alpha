@@ -1,0 +1,3 @@
+astra_shared_config_roles:
+    resource: "@AstraSharedBundle/Resources/config/roles.yml"
+    prefix:   /roles

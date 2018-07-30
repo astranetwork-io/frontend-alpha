@@ -3,12 +3,14 @@
 namespace Astra\SharedBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * UserRole
  *
  * @ORM\Table(name="user_role")
  * @ORM\Entity(repositoryClass="Astra\SharedBundle\Repository\UserRoleRepository")
+ * @UniqueEntity("name")
  */
 class UserRole
 {
@@ -33,7 +35,7 @@ class UserRole
      *
      * @ORM\Column(name="isRoot", type="boolean")
      */
-    private $isRoot;
+    private $isRoot = false;
 
 
     /**

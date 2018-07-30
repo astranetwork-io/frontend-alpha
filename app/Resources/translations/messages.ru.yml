@@ -107,6 +107,11 @@ main_menu:
     allResume: 'База Резюме'
     allVacancy: 'База Вакансий'
 
+  config:
+    name: 'Настройки'
+    roles: 'Роли пользователей'
+    accessMatrix: 'Матрица доступа'
+
 myProfile:
   name: 'Моя страница'
   view: 'Профиль'
@@ -257,3 +262,18 @@ contacts:
   my: 'Мои контакты'
   find: 'Поиск пользователей'
   messages: 'Сообщения'
+
+config:
+  userRoles:
+    entity:
+      name: Название
+    index:
+      title: 'Роли пользователя'
+      addNewButton: 'Добавить новую роль'
+      removeItem: 'Удалить'
+      confirmRemoveItem: 'Удалить эту роль?'
+      editItem: 'Редактировать'
+    edit:
+      addTitle: 'Добавление роли'
+      editTitle: 'Изменение роли'
+      saveButton: 'Сохранить изменения'

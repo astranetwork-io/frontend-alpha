@@ -104,3 +104,8 @@ services:
         arguments: ["@doctrine.orm.entity_manager","@astra.chat.service"]
         public: true
 
+    astra.user_role.service:
+        class: Astra\SharedBundle\Services\UserRoleService
+        arguments: ["@doctrine.orm.entity_manager"]
+        public: true
+

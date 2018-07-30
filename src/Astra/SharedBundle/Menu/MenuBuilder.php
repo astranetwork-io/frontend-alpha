@@ -103,6 +103,20 @@ class MenuBuilder
         $menu['job']->addChild('main_menu.job.allVacancy', array('route' => 'homepage'));
 
 
+        $menu->addChild('config',['route' => 'astra_shared_config_roles_index','label'=>'main_menu.config.name']);
+        $menu['config']->setAttribute('icon', 'fa-sliders');
+        $menu['config']->addChild('main_menu.config.roles', array('route' => 'astra_shared_config_roles_index'));
+        $menu['config']['main_menu.config.roles']->addChild('roles_add', array('route' => 'astra_shared_config_roles_add'));
+        $menu['config']['main_menu.config.roles']['roles_add']->setDisplay(false);
+
+        $userRole = $this->sharedVariableService->get(SharedVariableService::NAME_CURRENT_USER_ROLE);
+        if($userRole)
+        {
+            $menu['config']['main_menu.config.roles']->addChild('roles_edit', ['route' => 'astra_shared_config_roles_edit','routeParameters' => ['id'=>$userRole->getId()]]);
+            $menu['config']['main_menu.config.roles']['roles_edit']->setDisplay(false);
+        }
+
+        $menu['config']->addChild('main_menu.config.accessMatrix', array('route' => 'homepage'));
         return $menu;
     }
 
