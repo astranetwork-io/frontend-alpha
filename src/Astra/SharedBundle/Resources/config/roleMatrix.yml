@@ -1,0 +1,3 @@
+astra_shared_config_role_matrix_form:
+  path:     /
+  defaults: { _controller: AstraSharedBundle:Setup\RoleMatrix:config }

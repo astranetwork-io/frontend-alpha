@@ -264,6 +264,9 @@ contacts:
   messages: 'Сообщения'
 
 config:
+  roleMatrix:
+    pageTitle: 'Матрица доступа'
+    pageCaption: 'Матрица доступа'
   userRoles:
     entity:
       name: Название

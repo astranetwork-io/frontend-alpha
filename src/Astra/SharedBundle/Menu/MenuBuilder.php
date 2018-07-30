@@ -116,7 +116,7 @@ class MenuBuilder
             $menu['config']['main_menu.config.roles']['roles_edit']->setDisplay(false);
         }
 
-        $menu['config']->addChild('main_menu.config.accessMatrix', array('route' => 'homepage'));
+        $menu['config']->addChild('main_menu.config.accessMatrix', array('route' => 'astra_shared_config_role_matrix_form'));
         return $menu;
     }
 
