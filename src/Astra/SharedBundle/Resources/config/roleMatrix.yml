@@ -1,3 +1,7 @@
 astra_shared_config_role_matrix_form:
   path:     /
   defaults: { _controller: AstraSharedBundle:Setup\RoleMatrix:config }
+
+astra_shared_config_role_matrix_form_save:
+  path:     /save
+  defaults: { _controller: AstraSharedBundle:Setup\RoleMatrix:save }

@@ -267,6 +267,7 @@ config:
   roleMatrix:
     pageTitle: 'Матрица доступа'
     pageCaption: 'Матрица доступа'
+    saveButton: 'Сохранить изменения'
   userRoles:
     entity:
       name: Название
@@ -280,3 +281,30 @@ config:
       addTitle: 'Добавление роли'
       editTitle: 'Изменение роли'
       saveButton: 'Сохранить изменения'
+
+AccessTranslator:
+  MODULES:
+    projects: 'Проекты'
+    finance: 'Финансы'
+    work: 'Работа'
+    config: 'Конфигурация'
+  ACCESS:
+    projects:
+        self: 'Собственные проекты'
+        read: 'Просмотр чужих проектов'
+        edit: 'Изменение чужих проектов'
+    finance:
+        self: 'Собственные финансы'
+        read: 'Просмотр чужих финансов'
+        edit: 'Редактирование чужих финансов'
+    work:
+        self: 'Собственные финансы'
+        read: 'Просмотр чужих финансов'
+        edit: 'Редактирование чужих финансов'
+    config:
+        user_read: 'Просмотр пользователей'
+        user_mod: 'Изменение пользователей'
+        user_role_read: 'Просмотр ролей'
+        user_role_edit: 'Изменение ролей'
+        matrix_read: 'Просмотр матрицы доступа'
+        matrix_mod: 'Изменение матрицы доступа'

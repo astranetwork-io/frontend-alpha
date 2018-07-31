@@ -3,6 +3,8 @@
 namespace Astra\SharedBundle\Twig;
 use Astra\SharedBundle\Entity\File;
 use Astra\SharedBundle\Entity\User;
+use Astra\SharedBundle\Entity\UserRole;
+use Astra\SharedBundle\Services\Access;
 use Liip\ImagineBundle\Templating\ImagineExtension;
 use Symfony\Bridge\Twig\Extension\AssetExtension;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -14,12 +16,14 @@ class Extension extends \Twig_Extension
     private $privateFileDirectory;
     private $imagineExtension;
     private $tokenStorage;
+    private $accessService;
     public function __construct
     (
         ImagineExtension $imagineExtension,
         AssetExtension $assetExtension,
         $publicFileDirectory,
         $privateFileDirectory,
+        Access $accessService,
         TokenStorageInterface $tokenStorage = null
     )
     {
@@ -28,6 +32,7 @@ class Extension extends \Twig_Extension
         $this->publicFileDirectory = $publicFileDirectory;
         $this->privateFileDirectory = $privateFileDirectory;
         $this->imagineExtension = $imagineExtension;
+        $this->accessService = $accessService;
     }
 
     public function getName()
@@ -43,6 +48,8 @@ class Extension extends \Twig_Extension
             new \Twig_SimpleFunction('UserPhoto', [$this, 'getUserPhotoSrc']),
             new \Twig_SimpleFunction('CurrentUser', [$this, 'getCurrentUser']),
             new \Twig_SimpleFunction('print_r', [$this, 'print_r']),
+            new \Twig_SimpleFunction('accessRole', [$this, 'accessRole']),
+            new \Twig_SimpleFunction('access', [$this, 'access']),
         ];
     }
 
@@ -102,5 +109,15 @@ class Extension extends \Twig_Extension
     public function print_r($data)
     {
         return "<pre>".print_r($data,true)."</pre>";
+    }
+
+    public function access($zone, $action, User $user = null)
+    {
+        return $this->accessService->checkAccess($zone, $action, $user ? $user->getRoles() : null);
+    }
+
+    public function accessRole($zone, $action, UserRole $role = null)
+    {
+        return $this->accessService->checkAccess($zone, $action, $role ? [$role] : null);
     }
 }

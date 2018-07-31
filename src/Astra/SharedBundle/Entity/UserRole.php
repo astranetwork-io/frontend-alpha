@@ -37,6 +37,10 @@ class UserRole
      */
     private $isRoot = false;
 
+    /**
+     * @Doctrine\ORM\Mapping\Column(type="array", nullable=true)
+     */
+    private $access = [];
 
     /**
      * Get id
@@ -94,6 +98,41 @@ class UserRole
     public function getIsRoot()
     {
         return $this->isRoot;
+    }
+
+    /**
+     * @param string $zone
+     * @param string $action
+     * @return self
+     */
+    public function openAccess ($zone, $action) {
+        if (!empty($this->access[$zone][$action])) return $this;
+        $this->access[$zone][$action] = true;
+        return $this;
+    }
+
+    /**
+     * @param string $zone
+     * @param string $action
+     * @return self
+     */
+    public function closeAccess ($zone, $action) {
+        if (empty($this->access[$zone][$action])) return $this;
+        unset($this->access[$zone][$action]);
+        return $this;
+    }
+
+    /**
+     * @param string $zone
+     * @param string $action
+     * @return boolean
+     */
+    public function checkAccess ($zone, $action) {
+        return !empty($this->access[$zone][$action]);
+    }
+
+    public function resetAccess() {
+        $this->access = [];
     }
 }
 

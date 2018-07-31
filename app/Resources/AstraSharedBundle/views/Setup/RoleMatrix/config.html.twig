@@ -4,7 +4,60 @@
 {% block caption %}{{ 'config.roleMatrix.pageCaption' | trans }}{% endblock %}
 
 {% block body %}
-
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <form method="post" action="{{ path('astra_shared_config_role_matrix_form_save') }}">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-primary">{{ 'config.roleMatrix.saveButton' | trans }}</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>{{ 'config.userRoles.entity.name' | trans }}</th>
+                                        {% for role in roles %}
+                                            <th>
+                                                {{ role.name }}
+                                                <input type="hidden" name="form[roles][]" value="{{ role.id }}" />
+                                            </th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                {% for key, accessItems in access %}
+                                    {% set namePart = ('AccessTranslator.MODULES.' ~ key) | trans %}
+                                    <tr>
+                                        <th>{{ namePart }}</th>
+                                    </tr>
+                                    {% for action in accessItems  %}
+                                        {% set nameAction = ('AccessTranslator.ACCESS.' ~ key ~ '.' ~ action) | trans %}
+                                        <tr>
+                                            <td>{{ nameAction }}</td>
+                                            {% for role in roles %}
+                                                <td>
+                                                    <label title="{{ namePart }} :: {{ nameAction }} :: {{ role.name }}"> <input name="form[access][{{ role.id }}][{{ key }}][{{ action }}]" value="1" {% if accessRole(key,action,role) %}checked="checked"{% endif %} type="checkbox" class="i-checks"> </label>
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                {% endfor %}
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="text-right">
+                                <button type="submit" class="btn btn-primary">{{ 'config.roleMatrix.saveButton' | trans }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
 {% endblock %}
 {% block javascripts %}
 {% endblock %}

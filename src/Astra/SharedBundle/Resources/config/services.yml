@@ -5,7 +5,7 @@ services:
 
     twig.extension.site:
         class: Astra\SharedBundle\Twig\Extension
-        arguments: ["@liip_imagine.twig.extension","@twig.extension.assets",'%public_files_directory%','%private_files_directory%',"@security.token_storage"]
+        arguments: ["@liip_imagine.twig.extension","@twig.extension.assets",'%public_files_directory%','%private_files_directory%', "@astra.access","@security.token_storage"]
         tags:
             - { name: twig.extension }
 
@@ -109,3 +109,7 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
         public: true
 
+    astra.access:
+        class: Astra\SharedBundle\Services\Access
+        arguments: ["@doctrine.orm.entity_manager","@security.token_storage"]
+        public: true
