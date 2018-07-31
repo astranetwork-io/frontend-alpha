@@ -19,7 +19,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>{{ 'config.userRoles.entity.name' | trans }}</th>
+                                        <th></th>
                                         {% for role in roles %}
                                             <th>
                                                 {{ role.name }}
@@ -31,7 +31,7 @@
                                 {% for key, accessItems in access %}
                                     {% set namePart = ('AccessTranslator.MODULES.' ~ key) | trans %}
                                     <tr>
-                                        <th>{{ namePart }}</th>
+                                        <th colspan="{{ (roles | length) + 1 }}">{{ namePart }}</th>
                                     </tr>
                                     {% for action in accessItems  %}
                                         {% set nameAction = ('AccessTranslator.ACCESS.' ~ key ~ '.' ~ action) | trans %}
