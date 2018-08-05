@@ -15,6 +15,7 @@ form:
   changeFile: 'Изменить файл'
   doSave: 'Сохранить'
   doReset: 'Сброс'
+  doBack: 'Назад'
 
 login:
   bigName: 'ASTRA'
@@ -294,6 +295,9 @@ config:
       email: 'Почта'
       name: 'Имя'
       surname: 'Фамилия'
+    edit:
+      editTitle: 'Изменение пользователя'
+
 
 AccessTranslator:
   MODULES:

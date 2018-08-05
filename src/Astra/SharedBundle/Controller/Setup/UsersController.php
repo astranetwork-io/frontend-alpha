@@ -4,8 +4,10 @@ namespace Astra\SharedBundle\Controller\Setup;
 
 use Astra\SharedBundle\Controller\BaseController;
 use Astra\SharedBundle\Entity\UserRole;
+use Astra\SharedBundle\Form\UserAdminType;
 use Astra\SharedBundle\Form\UserRolleType;
 use Astra\SharedBundle\Services\SharedVariableService;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -20,35 +22,31 @@ class UsersController extends BaseController
 
     public function editAction(Request $request, $id)
     {
-        $userRolle = new UserRole();
-        $template = 'add.html.twig';
-        if ($id > 0)
-        {
-            $template = 'edit.html.twig';
-            $userRolle = $this->getEm()->find('AstraSharedBundle:UserRole',$id);
-            if (!$userRolle) throw new NotFoundHttpException();
-
-            $this->get('astra.shared_variable.service')->set(SharedVariableService::NAME_CURRENT_USER_ROLE,$userRolle);
+        $user = $this->getEm()->getRepository('AstraSharedBundle:User')->find($id);
+        if (!$user) {
+            throw new NotFoundHttpException();
         }
+        $this->get('astra.shared_variable.service')->set(SharedVariableService::NAME_CURRENT_USER_ADMIN_EDIT,$user);
 
-        $userRoleService = $this->get('astra.user_role.service');
-        $form = $this->createForm(UserRolleType::class, $userRolle, []);
+        $fileService = $this->get('astra.file.service');
+        $form = $this->createForm(UserAdminType::class, $user, []);
         $form->handleRequest($request);
-
-        $mainError = false;
-
-        if ($form->isValid() && $form->isSubmitted()) {
-            try
+        if(($form->isSubmitted()) && ($form->isValid()))
+        {
+            if ($user->getNewPhoto())
             {
-                $userRoleService->saveUserRolle($userRolle,$this->getUser());
-            }catch (\Exception $e)
-            {
-                return $this->render('AstraSharedBundle:Setup\Roles:'.$template, ['form'=>$form->createView(), 'mainError'=>$e->getMessage()]);
+                $file = $fileService->saveUploadetFile($user->getNewPhoto(),$user,'avatars');
+                if (!empty($file)) $user->setPhoto($file);
             }
-            return new RedirectResponse($this->generateUrl('astra_shared_config_roles_index'));
+
+            /** @var $userManager UserManagerInterface */
+            $userManager = $this->get('fos_user.user_manager');
+            $userManager->updateUser($user);
+
+            return new RedirectResponse($this->generateUrl('astra_shared_config_users_index'));
         }
 
-        return $this->render('AstraSharedBundle:Setup\Roles:'.$template, ['form'=>$form->createView(),'mainError'=>$mainError]);
+        return $this->render('AstraSharedBundle:Setup\Users:edit.html.twig', ['form'=>$form->createView()]);
     }
 
     public function deleteAction($id)

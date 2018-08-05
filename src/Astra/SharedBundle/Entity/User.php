@@ -158,7 +158,7 @@ class User extends BaseUser
      * @param \DateTime $birthday
      * @return User
      */
-    public function setBirthday($birthday)
+    public function setBirthday($birthday = null)
     {
         if (!($birthday instanceof \DateTime ))$birthday = null;
         $this->birthday = $birthday;
@@ -177,7 +177,7 @@ class User extends BaseUser
      * @param string $name
      * @return User
      */
-    public function setName($name)
+    public function setName($name = null)
     {
         $this->name = $name;
         return $this;
@@ -195,7 +195,7 @@ class User extends BaseUser
      * @param string $phone
      * @return User
      */
-    public function setPhone($phone)
+    public function setPhone($phone = null)
     {
         $this->phone = $phone;
         return $this;
@@ -213,7 +213,7 @@ class User extends BaseUser
      * @param string $surname
      * @return User
      */
-    public function setSurname($surname)
+    public function setSurname($surname = null)
     {
         $this->surname = $surname;
         return $this;
@@ -231,7 +231,7 @@ class User extends BaseUser
      * @param string $skype
      * @return User
      */
-    public function setSkype($skype)
+    public function setSkype($skype = null)
     {
         $this->skype = $skype;
         return $this;
@@ -249,7 +249,7 @@ class User extends BaseUser
      * @param mixed $new_photo
      * @return User
      */
-    public function setNewPhoto($new_photo)
+    public function setNewPhoto($new_photo = null)
     {
         $this->new_photo = $new_photo;
         return $this;
@@ -267,7 +267,7 @@ class User extends BaseUser
      * @param File $photo
      * @return User
      */
-    public function setPhoto(File $photo)
+    public function setPhoto(File $photo = null)
     {
         $this->photo = $photo;
         return $this;
@@ -285,7 +285,7 @@ class User extends BaseUser
      * @param string $aboutMe
      * @return User
      */
-    public function setAboutMe(string $aboutMe)
+    public function setAboutMe(string $aboutMe = null)
     {
         $this->aboutMe = $aboutMe;
         return $this;
@@ -303,7 +303,7 @@ class User extends BaseUser
      * @param string $status
      * @return User
      */
-    public function setStatus(string $status)
+    public function setStatus(string $status = null)
     {
         $this->status = $status;
         return $this;
