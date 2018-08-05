@@ -46,7 +46,7 @@ class UsersController extends BaseController
             return new RedirectResponse($this->generateUrl('astra_shared_config_users_index'));
         }
 
-        return $this->render('AstraSharedBundle:Setup\Users:edit.html.twig', ['form'=>$form->createView()]);
+        return $this->render('AstraSharedBundle:Setup\Users:edit.html.twig', ['form'=>$form->createView(), 'user' => $user]);
     }
 
     public function deleteAction($id)

@@ -3,6 +3,9 @@
 {% block title %}{{ 'config.users.edit.editTitle' | trans }}{% endblock %}
 {% block caption %}{{ 'config.users.edit.editTitle' | trans }}{% endblock %}
 {% block body %}
+    <div class="text-center">
+        <img alt="image" class="img-circle" src="{{ UserPhoto(user,'avatar_middle') }}"/>
+    </div>
     {{ form_start(form, {'method': 'post', 'action': '', 'attr': {'class': 'form-horizontal'}}) }}
     {{ form_widget(form) }}
     <div class="hr-line-dashed"></div>
