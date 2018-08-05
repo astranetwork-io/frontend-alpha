@@ -5,3 +5,7 @@ astra_shared_config_roles:
 astra_shared_config_role_matrix:
     resource: "@AstraSharedBundle/Resources/config/roleMatrix.yml"
     prefix:   /role-matrix
+
+astra_shared_config_users:
+    resource: "@AstraSharedBundle/Resources/config/users.yml"
+    prefix:   /users

@@ -8,6 +8,7 @@ class SharedVariableService
     const NAME_CURRENT_TASK = '__current_task__';
     const NAME_PRIVATE_MESSAGE = '__private_message__';
     const NAME_CURRENT_USER_ROLE = '__user_rolle__';
+    const NAME_CURRENT_USER_ADMIN_EDIT= '__user_admin_edit__';
 
     protected $variables = [];
 

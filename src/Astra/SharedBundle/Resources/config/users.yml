@@ -1,0 +1,19 @@
+astra_shared_config_users_index:
+    path:     /
+    defaults: { _controller: AstraSharedBundle:Setup\Roles:index }
+
+astra_shared_config_users_edit:
+    path:     /edit/{id}
+    defaults: { _controller: AstraSharedBundle:Setup\Roles:edit }
+    requirements:
+        id:  \d+
+
+astra_shared_config_users_add:
+    path:     /add
+    defaults: { _controller: AstraSharedBundle:Setup\Roles:edit , id: 0}
+
+astra_shared_config_users_delete:
+    path:     /delete/{id}
+    defaults: { _controller: AstraSharedBundle:Setup\Roles:delete }
+    requirements:
+        id:  \d+

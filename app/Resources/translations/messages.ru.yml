@@ -111,6 +111,7 @@ main_menu:
     name: 'Настройки'
     roles: 'Роли пользователей'
     accessMatrix: 'Матрица доступа'
+    users: 'Пользователи'
 
 myProfile:
   name: 'Моя страница'

@@ -117,6 +117,15 @@ class MenuBuilder
         }
 
         $menu['config']->addChild('main_menu.config.accessMatrix', array('route' => 'astra_shared_config_role_matrix_form'));
+
+        $menu['config']->addChild('main_menu.config.users', array('route' => 'astra_shared_config_users_index'));
+        $userAdminEdit = $this->sharedVariableService->get(SharedVariableService::NAME_CURRENT_USER_ADMIN_EDIT);
+        if($userAdminEdit)
+        {
+            $menu['config']['main_menu.config.users']->addChild('user_admin_edit', ['route' => 'astra_shared_config_users_edit','routeParameters' => ['id'=>$userAdminEdit->getId()]]);
+            $menu['config']['main_menu.config.users']['user_admin_edit']->setDisplay(false);
+        }
+
         return $menu;
     }
 
