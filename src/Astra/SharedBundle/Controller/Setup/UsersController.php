@@ -51,17 +51,17 @@ class UsersController extends BaseController
 
     public function deleteAction($id)
     {
-        $userRolle = $this->getEm()->find('AstraSharedBundle:UserRole',$id);
-        if (!$userRolle) throw new NotFoundHttpException();
-        $userRoleService = $this->get('astra.user_role.service');
+        $user = $this->getEm()->find('AstraSharedBundle:User',$id);
+        if (!$user) throw new NotFoundHttpException();
+        $userService = $this->get('fos_user.user_manager');
         try
         {
-            $userRoleService->removeUserRolle($userRolle);
+            $userService->deleteUser($user);
         }catch (\Exception $e){
 
         }
 
-        return new RedirectResponse($this->generateUrl('astra_shared_config_roles_index'));
+        return new RedirectResponse($this->generateUrl('astra_shared_config_users_index'));
     }
 
 }
