@@ -3,6 +3,7 @@
 namespace Astra\SharedBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,6 +24,16 @@ class UserRolleType extends AbstractType
             'attr'=>[
                 'class'=>'touchspin'
             ]
+        ]);
+
+        $builder->add('isRoot', CheckboxType::class, [
+            'label' => 'config.userRoles.entity.isRoot',
+            'required' => false,
+        ]);
+
+        $builder->add('isDefault', CheckboxType::class, [
+            'label' => 'config.userRoles.entity.isDefault',
+            'required' => false,
         ]);
     }
 

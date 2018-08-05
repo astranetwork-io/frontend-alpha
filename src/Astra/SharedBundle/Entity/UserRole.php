@@ -38,6 +38,13 @@ class UserRole
     private $isRoot = false;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="isDefault", type="boolean")
+     */
+    private $isDefault = false;
+
+    /**
      * @Doctrine\ORM\Mapping\Column(type="array", nullable=true)
      */
     private $access = [];
@@ -98,6 +105,30 @@ class UserRole
     public function getIsRoot()
     {
         return $this->isRoot;
+    }
+
+    /**
+     * Set isDefault
+     *
+     * @param boolean $isDefault
+     *
+     * @return UserRole
+     */
+    public function setIsDefault($isDefault)
+    {
+        $this->isDefault = $isDefault;
+
+        return $this;
+    }
+
+    /**
+     * Get isDefault
+     *
+     * @return bool
+     */
+    public function getIsDefault()
+    {
+        return $this->isDefault;
     }
 
     /**

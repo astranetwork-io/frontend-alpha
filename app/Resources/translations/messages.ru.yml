@@ -273,6 +273,8 @@ config:
   userRoles:
     entity:
       name: Название
+      isRoot: Супер
+      isDefault: По умолчанию
     index:
       title: 'Роли пользователя'
       addNewButton: 'Добавить новую роль'
