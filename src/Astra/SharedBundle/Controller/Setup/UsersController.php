@@ -14,8 +14,8 @@ class UsersController extends BaseController
 {
     public function indexAction()
     {
-        $roles = $this->getEm()->getRepository('AstraSharedBundle:UserRole')->findBy([],['name' => 'ASC']);
-        return $this->render('AstraSharedBundle:Setup\Roles:index.html.twig', ['roles' => $roles]);
+        $users = $this->getEm()->getRepository('AstraSharedBundle:User')->findBy([],['username' => 'ASC']);
+        return $this->render('AstraSharedBundle:Setup\Users:index.html.twig', ['users' => $users]);
     }
 
     public function editAction(Request $request, $id)

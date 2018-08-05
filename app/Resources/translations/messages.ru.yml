@@ -283,6 +283,18 @@ config:
       editTitle: 'Изменение роли'
       saveButton: 'Сохранить изменения'
 
+  users:
+    index:
+      title: 'Пользователи'
+      removeItem: 'Удалить'
+      confirmRemoveItem: 'Удалить этого пользователя?'
+      editItem: 'Редактировать'
+    entity:
+      username: 'Логин'
+      email: 'Почта'
+      name: 'Имя'
+      surname: 'Фамилия'
+
 AccessTranslator:
   MODULES:
     projects: 'Проекты'

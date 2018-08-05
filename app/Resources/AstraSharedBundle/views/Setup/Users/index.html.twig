@@ -1,33 +1,34 @@
 {% extends 'body_main.html.twig' %}
 
-{% block title %}{{ 'config.userRoles.index.title' | trans }}{% endblock %}
-{% block caption %}{{ 'config.userRoles.index.title' | trans }}{% endblock %}
+{% block title %}{{ 'config.users.index.title' | trans }}{% endblock %}
+{% block caption %}{{ 'config.users.index.title' | trans }}{% endblock %}
 {% block body %}
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
-                        <div class="row">
-                            <div class="text-right">
-                                <a href="{{ path('astra_shared_config_roles_add') }}" type="button" class="btn btn-primary btn-sm">{{ 'config.userRoles.index.addNewButton' | trans }}</a>
-                            </div>
-                        </div>
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th>{{ 'config.userRoles.entity.name' | trans }}</th>
+                                    <th>{{ 'config.users.entity.username' | trans }}</th>
+                                    <th>{{ 'config.users.entity.email' | trans }}</th>
+                                    <th>{{ 'config.users.entity.name' | trans }}</th>
+                                    <th>{{ 'config.users.entity.surname' | trans }}</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for role in roles %}
+                                {% for user in users %}
                                     <tr>
-                                        <td>{{ role.name }}</td>
-                                        <td class="text-right"><a onclick="return confirm('{{ 'config.userRoles.index.confirmRemoveItem' | trans }}');" class="btn btn-danger btn-xs" href="{{ path('astra_shared_config_roles_delete', {'id':role.id}) }}">{{ 'config.userRoles.index.removeItem'|trans }}</a> </td>
-                                        <td class="text-right"><a class="btn btn-primary btn-xs" href="{{ path('astra_shared_config_roles_edit', {'id':role.id}) }}">{{ 'config.userRoles.index.editItem'|trans }}</a> </td>
+                                        <td>{{ user.username }}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ user.name }}</td>
+                                        <td>{{ user.surname }}</td>
+                                        <td class="text-right"><a onclick="return confirm('{{ 'config.users.index.confirmRemoveItem' | trans }}');" class="btn btn-danger btn-xs" href="{{ path('astra_shared_config_users_delete', {'id':user.id}) }}">{{ 'config.users.index.removeItem'|trans }}</a> </td>
+                                        <td class="text-right"><a class="btn btn-primary btn-xs" href="{{ path('astra_shared_config_users_edit', {'id':user.id}) }}">{{ 'config.users.index.editItem'|trans }}</a> </td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
